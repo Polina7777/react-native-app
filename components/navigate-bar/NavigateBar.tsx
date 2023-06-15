@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { Dimensions, Pressable, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
@@ -7,6 +7,9 @@ export interface NavigateBarProps{
     tags:string[],
     handleTagClick:any
 }
+const { width } = Dimensions.get('window');
+const box_count = 3;
+const tag_width = width / box_count;
 
 export default function NavigateBar({tags,handleTagClick}:NavigateBarProps) {
   return (
@@ -21,25 +24,23 @@ export default function NavigateBar({tags,handleTagClick}:NavigateBarProps) {
         </TouchableOpacity>
        })}
        </ScrollView>
-      {/* <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" /> */}
+  
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 5,
     marginTop: 3,
+   alignSelf:'center'
   },
   navigate_tag: {
     fontSize: 21,
     fontWeight: 'bold',
-    width:100,
+    width:tag_width,
     borderWidth:1,
     borderColor:'#D6FC51',
     color:'#D6FC51',
@@ -49,13 +50,9 @@ const styles = StyleSheet.create({
     textAlign:'center'
   },
 
-  separator: {
-    marginVertical: 10,
-    height: 1,
-    width: '80%',
-  },
   navigate__wrapper: {
    flexDirection:'row',
-   backgroundColor:'transition'
+   backgroundColor:'transition',
+    marginHorizontal:10
   },
 });

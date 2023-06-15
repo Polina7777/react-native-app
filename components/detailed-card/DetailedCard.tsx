@@ -2,6 +2,7 @@ import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
 import { Text, View } from '../../components/Themed';
 import ImageComponent from '../image/Image';
+import BackButton from '../BackButton';
 
 export interface IDetailedCardData {
     additionalInfo: string[],
@@ -15,6 +16,7 @@ export interface DetailedCardProps {
 export default function DetailedCard({data}:DetailedCardProps) {
   return (
     <View style={styles.container}>
+      {/* <BackButton/> */}
      {/* <ImageComponent urlImage={data.imageUrl}/> */}
     <View style={styles.info__wrapper}>
     <View style={styles.addition_info__wrapper}>
@@ -37,9 +39,6 @@ export default function DetailedCard({data}:DetailedCardProps) {
             </View>
         </View>
     </View>
-      {/* <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" /> */}
     </View>
   );
 }
@@ -65,7 +64,6 @@ const styles = StyleSheet.create({
     backgroundColor:'transition',
     fontSize: 12,
     fontWeight: 'bold',
-    // width:60,
     borderWidth:1,
     borderColor:'#D6FC51',
     color:'#D6FC51',
@@ -93,8 +91,6 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     gap:7,
     fontSize: 12,
-    fontWeight: 'bold',
-    // width:60,
     borderWidth:1,
     borderColor:'#D6FC51',
     color:'#D6FC51',
@@ -108,8 +104,6 @@ const styles = StyleSheet.create({
     gap:7,
     backgroundColor:'transition',
     fontSize: 12,
-    fontWeight: 'bold',
-    // width:60,
     borderWidth:1,
     borderColor:'#D6FC51',
     color:'#D6FC51',
@@ -121,9 +115,4 @@ const styles = StyleSheet.create({
    detail_description__item:{
     color:'#D6FC51',
    }
-//   separator: {
-//     marginVertical: 30,
-//     height: 1,
-//     width: '80%',
-//   },
 });

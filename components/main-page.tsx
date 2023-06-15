@@ -1,15 +1,18 @@
-import { StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Dimensions, StyleSheet } from "react-native";
+// import { NavigationContainer } from "@react-navigation/native";
+// import { createNativeStackNavigator } from "@react-navigation/native-stack";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Text, View } from "./Themed";
 import NavigateBar from "./navigate-bar/NavigateBar";
 import CardList from "./cardlist/CardList";
 import DetailedCard from "./detailed-card/DetailedCard";
 import Card from "./card/Card";
 import { useState } from "react";
-import { useNavigation } from '@react-navigation/native';
-import two from "../app/(tabs)/two";
+import { NavigationContainer } from "@react-navigation/native";
+import { Stack } from "expo-router";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { useNavigation } from '@react-navigation/native';
+
 
 const navigateTags = ["Tag1", "Tag2", "Tag3"];
 
@@ -67,12 +70,11 @@ export const detailedCardInfo = {
   constituents: ["const1", "const2", "const3", "const4", "const5"],
 };
 
-const Tab = createBottomTabNavigator();
-// const Stack = createNativeStackNavigator();
+
 export default function MainPage() {
 
   const [showDetailedCard, setShowDetailedCard] = useState(false);
-  const navigation = useNavigation();
+
   const handleTagClick = () => {
     console.log("Tag click");
   };
@@ -80,6 +82,7 @@ export default function MainPage() {
      setShowDetailedCard(true);
  
   };
+  const Stack = createNativeStackNavigator();
   return (
     <View style={styles.main_page}>
      
@@ -91,47 +94,31 @@ export default function MainPage() {
         <CardList cardList={cardList} handleCardPress={cardClick}  />
         </View>
       )}
-{/* 
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      /> */}
-      {/* <EditScreenInfo path="app/(tabs)/index.tsx" /> */}
+       {/* <NavigationContainer>
+      <Stack.Navigator>
+      <NavigateBar tags={navigateTags} handleTagClick={handleTagClick} />
+        <Stack.Screen name="Home">
+        {(props) => <CardList {...props} cardList={cardList}  handleCardPress={cardClick} />}
+          </Stack.Screen>
+          <Stack.Screen name="Card">
+        {(props) => <DetailedCard {...props} data={detailedCardInfo} />}
+          </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer> */}
+
     </View>
   );
-  {
-    /* <View style={styles.main_page}>
-<NavigateBar tags={navigateTags} handleTagClick={handleTagClick}/>
-<Tab.Navigator>
-<Tab.Screen name="Home">
-  {(props) => <CardList {...props} cardList={cardList} />}
 
-</Tab.Screen>
- <Tab.Screen name="Card">
-  {(props) => <DetailedCard {...props} data={detailedCardInfo}/>}
- </Tab.Screen>
-</Tab.Navigator>
-</View> */
-  }
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   backgroundColor:'black'
-  // },
+
   main_page: {
     marginVertical: 30,
-    // height:'100%'
-    // width:'100%'
+     width:'100%',
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor:'black'
   },
 
-  separator: {
-    // marginVertical: 0,
-    // height: 1,
-    // width: '100%',
-  },
 });

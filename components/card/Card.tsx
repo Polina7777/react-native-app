@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
@@ -10,6 +10,11 @@ export interface CardProps {
     options:any;
     imageUrl:any;
 }
+const { height } = Dimensions.get('window');
+const box_count = 7;
+const box_height = height / box_count;
+const { width } = Dimensions.get('window');
+const tag_width = width - 20;
 export default function Card({title,description,options,imageUrl}:CardProps) {
   return (
     <View style={styles.card__wrapper}>
@@ -36,12 +41,11 @@ export default function Card({title,description,options,imageUrl}:CardProps) {
 
 const styles = StyleSheet.create({
   card__wrapper: {
-    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 12,
     fontWeight: 'bold',
-    // height:150,
+    height:box_height,
     borderWidth:1,
     borderColor:'#D6FC51',
     color:'#D6FC51',
@@ -50,7 +54,7 @@ const styles = StyleSheet.create({
     paddingHorizontal:10,
     paddingVertical:3,
     textAlign:'center',
-    marginVertical:5
+    width:tag_width
   },
   title: {
     fontSize: 10,
@@ -73,9 +77,4 @@ const styles = StyleSheet.create({
    description: {
     display:'flex',
    },
-  separator: {
-    // marginVertical: 30,
-    // height: 1,
-    // width: '80%',
-  },
 });
