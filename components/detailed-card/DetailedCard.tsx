@@ -6,34 +6,36 @@ import BackButton from '../BackButton';
 
 export interface IDetailedCardData {
     additionalInfo: string[],
-    detailedDescription: string,
-    imageUrl:string,
+    process: string,
+    image_url:string,
     constituents: string[]
 }
 export interface DetailedCardProps {
  data:IDetailedCardData
 }
-export default function DetailedCard({data}:DetailedCardProps) {
+export default function DetailedCard({data}:any) {
+
+  console.log(data,'det')
   return (
     <View style={styles.container}>
       {/* <BackButton/> */}
-     {/* <ImageComponent urlImage={data.imageUrl}/> */}
+     <ImageComponent urlImage={data.attributes.image_url}/>
     <View style={styles.info__wrapper}>
-    <View style={styles.addition_info__wrapper}>
+    {/* <View style={styles.addition_info__wrapper}>
         {data.additionalInfo.map((item,index)=>{
          return <Text key={index} style={styles.additional_item}>{item}</Text>
         })}
-        </View>
+        </View> */}
         <View style={styles.context__wrapper}>
-            <View style={styles.constituents__wrapper}>
+            {/* <View style={styles.constituents__wrapper}>
 {data.constituents.map((item,index)=>{
     return <Text key={index} style={styles.constituent__item}>{item}</Text>
 })}
-            </View>
+            </View> */}
             <View style={styles.detailed_description__wrapper}>
             <SafeAreaView >
       <ScrollView>
-              <Text style={styles.detail_description__item}>{data.detailedDescription}</Text> 
+              <Text style={styles.detail_description__item}>{data.attributes.process}</Text> 
               </ScrollView> 
               </SafeAreaView>
             </View>

@@ -4,7 +4,8 @@ import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
 
 export interface NavigateBarProps{
-    tags:string[],
+    // tags:string[],
+    tags:any,
     handleTagClick:any
 }
 const { width } = Dimensions.get('window');
@@ -12,21 +13,22 @@ const box_count = 3;
 const tag_width = width / box_count;
 
 export default function NavigateBar({tags,handleTagClick}:NavigateBarProps) {
+console.log(tags)
   return (
-    <View style={styles.navigate__wrapper}>
+   tags? ( <View style={styles.navigate__wrapper}>
    <ScrollView horizontal={true}>
        {tags.map((item,index)=>{
         return  <TouchableOpacity   key = {index}
         style = {styles.container}>
           <Pressable onPress={handleTagClick}>
-        <Text  style={styles.navigate_tag}>{item}</Text>
+        <Text  style={styles.navigate_tag}>{item.attributes.name}</Text>
         </Pressable>
         </TouchableOpacity>
        })}
        </ScrollView>
   
     </View>
-  );
+  ):null);
 }
 
 const styles = StyleSheet.create({
