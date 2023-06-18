@@ -2,7 +2,6 @@ import { Dimensions, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import ImageComponent from "../image/Image";
 
-
 export interface CardProps {
   title: string;
   description: string;
@@ -10,10 +9,13 @@ export interface CardProps {
   imageUrl?: any;
   id?: number;
 }
-const { height } = Dimensions.get("window");
+// const { height } = Dimensions.get("window");
+// const { width } = Dimensions.get("window");
+const { height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 const box_count = 7;
 const box_height = height / box_count;
-const { width } = Dimensions.get("window");
+
 const tag_width = width - 20;
 
 export default function Card({
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     fontSize: 12,
     fontWeight: "bold",
-    height: box_height,
+    minHeight: 150,
     borderWidth: 1,
     borderColor: "#D6FC51",
     color: "#D6FC51",
@@ -78,8 +80,6 @@ const styles = StyleSheet.create({
   },
   options__wrapper: {
     backgroundColor: "transition",
-    flexDirection: "row",
-    gap: 10,
   },
   option: {
     color: "#D6FC51",

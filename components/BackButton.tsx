@@ -3,15 +3,13 @@ import * as React from 'react';
 import { Button } from 'react-native';
 
 
-function BackButton() {
-  const navigation = useNavigation();
+function BackButton({handlePress}:any) {
+  // const navigation = useNavigation();
 
   return (
     <Button
       title="Back"
-      onPress={() => {
-        navigation.goBack();
-      }}
+      onPress={handlePress}
     />
   );
 }

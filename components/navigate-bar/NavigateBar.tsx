@@ -5,16 +5,18 @@ export interface NavigateBarProps{
     tags:any,
     handleTagClick:any
 }
-const { width } = Dimensions.get('window');
+const { height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
+// const { width } = Dimensions.get('window');
 const box_count = 3;
 const tag_width = width / box_count;
 
+
 export default function NavigateBar({tags,handleTagClick}:NavigateBarProps) {
-console.log(tags)
   return (
    tags? ( <View style={styles.navigate__wrapper}>
-   <ScrollView horizontal={true}>
-       {tags.map((item,index)=>{
+   <ScrollView horizontal={true} style={styles.scroll_view}>
+       {tags.map((item,index:number)=>{
         return  <TouchableOpacity   key = {index}
         style = {styles.container}>
           <Pressable onPress={()=>handleTagClick(item.id)}>
@@ -54,4 +56,7 @@ const styles = StyleSheet.create({
    backgroundColor:'transition',
     marginHorizontal:10
   },
+  scroll_view :{
+  backgroundColor:'black'
+  }
 });
