@@ -9,7 +9,8 @@ import Card from "../../components/card/Card";
 import React, { useEffect, useState } from "react";
 import DetailedCard from "../detailed-card/DetailedCard";
 import NavigateBar from "../navigate-bar/NavigateBar";
-import { getRecipeById, recipesApi } from "../../api-requests/api-requests";
+import { recipesApi } from "../../api-requests/recipes-api";
+import { categoryApi } from "../../api-requests/category-api";
 
 export interface ICard {
   title: string;
@@ -21,49 +22,47 @@ export interface CardListProps {
   cardList: any;
   handleCardPress: any;
 }
-const navigateTags = ["Tag1", "Tag2", "Tag3"];
 
 export default function CardList({ cardList, handleCardPress }: CardListProps) {
   const [showDetailedCard, setShowDetailedCard] = useState(false);
-const [cardId,setCardId] = useState('')
+  const [cardId, setCardId] = useState("");
   const [detailedCardInfo, setDetailedCardInfo] = useState();
-const[tags,setTags] = useState();
+  const [tags, setTags] = useState();
 
-  const handleTagClick = () => {
+  const handleTagClick = (id:string) => {
+  console.log(id,'tagid')
     console.log("Tag click");
   };
 
-  const getCategories = async ()=>{
-    await fetch(`http://localhost:1337/api/categories`,{
-      method:'GET'
-    }) .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      setTags(data.data)
-    });
-  }
-  const getDetailedCardInfo = async (id) => {
-    try {const info = await recipesApi.getRecipeById(id)
-    setDetailedCardInfo(info)}
-    catch(err) {
-      console.log(err)
+  const getCategories = async () => {
+    try {
+      const tagsList = await categoryApi.getCategoriesOfRecipes();
+      setTags(tagsList);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const getDetailedCardInfo = async (id:string) => {
+    try {
+      const info = await recipesApi.getRecipeById(id);
+      setDetailedCardInfo(info);
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  const cardClick = (id:string) => {
+  const cardClick = (id: string) => {
     console.log(id);
     setShowDetailedCard(true);
-    getDetailedCardInfo(id)
-
+    getDetailedCardInfo(id);
   };
-useEffect(()=>{
-  getCategories()
-},[])
+  useEffect(() => {
+    getCategories();
+  }, []);
   // useEffect(() => {
   //   getDetailedCardInfo();
   // }, [cardId]);
- 
+
   return (
     <>
       {showDetailedCard && detailedCardInfo ? (
@@ -92,7 +91,6 @@ useEffect(()=>{
         </View>
       )}
     </>
-
   );
 }
 

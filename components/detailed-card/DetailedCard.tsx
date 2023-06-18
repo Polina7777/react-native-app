@@ -15,7 +15,6 @@ export interface DetailedCardProps {
 }
 export default function DetailedCard({data}:any) {
 
-  console.log(data,'det')
   return (
     <View style={styles.container}>
       {/* <BackButton/> */}

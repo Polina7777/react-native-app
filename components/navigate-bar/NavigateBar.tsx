@@ -20,7 +20,7 @@ console.log(tags)
        {tags.map((item,index)=>{
         return  <TouchableOpacity   key = {index}
         style = {styles.container}>
-          <Pressable onPress={handleTagClick}>
+          <Pressable onPress={()=>handleTagClick(item.attributes.id)}>
         <Text  style={styles.navigate_tag}>{item.attributes.name}</Text>
         </Pressable>
         </TouchableOpacity>

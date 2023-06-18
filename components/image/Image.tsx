@@ -6,12 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-// const ImageComponent = (urlImage:any) => (
 
-// //  <Image source = {{uri:urlImage}}/>
-  
-// )
-// export default ImageComponent;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -28,7 +23,6 @@ const styles = StyleSheet.create({
 });
 
 export function ImageComponent ({urlImage}:any){
-console.log(urlImage,'imageurl')
  return (
 <Image style = {styles.image} source = {{uri:urlImage}} alt='image'/> 
   )

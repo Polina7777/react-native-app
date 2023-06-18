@@ -12,6 +12,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { getAllRecipes } from "../api-requests/api-requests";
+import { recipesApi } from "../api-requests/recipes-api";
 // import { useNavigation } from '@react-navigation/native';
 
 const navigateTags = ["Tag1", "Tag2", "Tag3"];
@@ -72,31 +73,22 @@ export const detailedCardInfo = {
 
 export default function MainPage() {
   const [cardList, setCardList] = useState([]);
-  // const [showDetailedCard, setShowDetailedCard] = useState(false);
 
   const handleTagClick = () => {
     console.log("Tag click");
   };
 
-  const getCardInfo = async () =>{
-    await fetch('http://localhost:1337/api/foods',{
-      method:'GET',
-    }).then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      setCardList(data.data)
-      console.log(data.data,'data');
-    })
+  const getCardsInfo = async () => {
+    try {
+      const info = await recipesApi.getAllRecipes();
+      setCardList(info);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
- 
-  }
-
-  // const getCardInfo = async () => {
-  //   setCardList(await getAllRecipes());
-  // };
   useEffect(() => {
-    getCardInfo();
+    getCardsInfo();
   }, []);
 
   return (
@@ -107,18 +99,7 @@ export default function MainPage() {
       <View style={styles.main_page}>
         <CardList cardList={cardList} handleCardPress={handleTagClick} />
       </View>
-      {/* )} */}
-      {/* <NavigationContainer>
-      <Stack.Navigator>
-      <NavigateBar tags={navigateTags} handleTagClick={handleTagClick} />
-        <Stack.Screen name="Home">
-        {(props) => <CardList {...props} cardList={cardList}  handleCardPress={cardClick} />}
-          </Stack.Screen>
-          <Stack.Screen name="Card">
-        {(props) => <DetailedCard {...props} data={detailedCardInfo} />}
-          </Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer> */}
+  
     </View>
   );
 }
