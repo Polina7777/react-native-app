@@ -1,10 +1,7 @@
 import { Dimensions, Pressable, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-
-import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
 
 export interface NavigateBarProps{
-    // tags:string[],
     tags:any,
     handleTagClick:any
 }
@@ -20,7 +17,7 @@ console.log(tags)
        {tags.map((item,index)=>{
         return  <TouchableOpacity   key = {index}
         style = {styles.container}>
-          <Pressable onPress={()=>handleTagClick(item.attributes.id)}>
+          <Pressable onPress={()=>handleTagClick(item.id)}>
         <Text  style={styles.navigate_tag}>{item.attributes.name}</Text>
         </Pressable>
         </TouchableOpacity>

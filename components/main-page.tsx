@@ -72,24 +72,24 @@ export const detailedCardInfo = {
 };
 
 export default function MainPage() {
-  const [cardList, setCardList] = useState([]);
+  // const [cardList, setCardList] = useState([]);
 
-  const handleTagClick = () => {
-    console.log("Tag click");
-  };
+  // const handleTagClick = () => {
+  //   console.log("Tag click");
+  // };
 
-  const getCardsInfo = async () => {
-    try {
-      const info = await recipesApi.getAllRecipes();
-      setCardList(info);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getCardsInfo = async () => {
+  //   try {
+  //     const info = await recipesApi.getAllRecipes();
+  //     setCardList(info);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  useEffect(() => {
-    getCardsInfo();
-  }, []);
+  // useEffect(() => {
+  //   getCardsInfo();
+  // }, []);
 
   return (
     <View style={styles.main_page}>
@@ -97,7 +97,7 @@ export default function MainPage() {
         <DetailedCard data={detailedCardInfo} />
       ) : ( */}
       <View style={styles.main_page}>
-        <CardList cardList={cardList} handleCardPress={handleTagClick} />
+        <CardList cardList={cardList}  />
       </View>
   
     </View>

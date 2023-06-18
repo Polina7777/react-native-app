@@ -1,9 +1,8 @@
-//http://localhost:1337/api/foods?populate=*&filters[category][name][$eqi]=dinner
 
 export const filtersByTags = async(tag:string)=>{
-    const response = await fetch(`http://localhost:1337/api/foods?populate=*&filters[category][name][$eqi]=${tag}`,{method:'GET'});
+    const response = await fetch(`http://localhost:1337/api/foods?populate=*&filters[category][id][$eqi]=${tag}`,{method:'GET'});
     const data = await response.json();
-    const recipes = data.data
-    return recipes;
+    const filteredData = data.data
+    return filteredData;
 }
-export const recipesApi = {filtersByTags}
+export const filtersApi = {filtersByTags}

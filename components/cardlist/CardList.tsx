@@ -11,6 +11,7 @@ import DetailedCard from "../detailed-card/DetailedCard";
 import NavigateBar from "../navigate-bar/NavigateBar";
 import { recipesApi } from "../../api-requests/recipes-api";
 import { categoryApi } from "../../api-requests/category-api";
+import { filtersApi } from "../../api-requests/filters-api";
 
 export interface ICard {
   title: string;
@@ -23,15 +24,38 @@ export interface CardListProps {
   handleCardPress: any;
 }
 
-export default function CardList({ cardList, handleCardPress }: CardListProps) {
+export default function CardList() {
   const [showDetailedCard, setShowDetailedCard] = useState(false);
   const [cardId, setCardId] = useState("");
   const [detailedCardInfo, setDetailedCardInfo] = useState();
   const [tags, setTags] = useState();
 
-  const handleTagClick = (id:string) => {
-  console.log(id,'tagid')
-    console.log("Tag click");
+  const [cardList, setCardList] = useState([]);
+
+  const getCardsInfo = async () => {
+    try {
+      const info = await recipesApi.getAllRecipes();
+      setCardList(info);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getCardsInfo();
+  }, []);
+
+  const filterByTag = async (tag: string) => {
+    try {
+      const filteredList = await filtersApi.filtersByTags(tag);
+      setCardList(filteredList);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleTagClick = (id: string) => {
+    filterByTag(id);
   };
 
   const getCategories = async () => {
@@ -42,7 +66,7 @@ export default function CardList({ cardList, handleCardPress }: CardListProps) {
       console.log(err);
     }
   };
-  const getDetailedCardInfo = async (id:string) => {
+  const getDetailedCardInfo = async (id: string) => {
     try {
       const info = await recipesApi.getRecipeById(id);
       setDetailedCardInfo(info);
@@ -59,9 +83,6 @@ export default function CardList({ cardList, handleCardPress }: CardListProps) {
   useEffect(() => {
     getCategories();
   }, []);
-  // useEffect(() => {
-  //   getDetailedCardInfo();
-  // }, [cardId]);
 
   return (
     <>

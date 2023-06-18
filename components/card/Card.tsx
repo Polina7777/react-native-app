@@ -1,9 +1,7 @@
 import { Dimensions, StyleSheet } from "react-native";
-
-import EditScreenInfo from "../../components/EditScreenInfo";
 import { Text, View } from "../../components/Themed";
 import ImageComponent from "../image/Image";
-import { useState } from "react";
+
 
 export interface CardProps {
   title: string;
