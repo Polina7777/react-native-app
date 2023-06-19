@@ -4,7 +4,7 @@ import DetailedCard from "./detailed-card/DetailedCard";
 import Card from "./card/Card";
 import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { Stack } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { recipesApi } from "../api-requests/recipes-api";
 import "react-native-gesture-handler";
@@ -55,7 +55,8 @@ export default function MainPage() {
   const Stack = createNativeStackNavigator();
 
   return (
-    
+    // <View style={styles.main_page}>
+      <>
     <NavigationContainer fallback={<Text>Loading...</Text>}>
     <Stack.Navigator 
       screenOptions={{
@@ -69,26 +70,26 @@ export default function MainPage() {
       <Stack.Screen name="General">
         {(props) => <CardList {...props} handleClick={cardClick} />}
       </Stack.Screen>
+       
       <Stack.Screen name="Card">
         {(props) => <DetailedCard {...props} data={detailedCardInfo} />}
       </Stack.Screen>
+      
     </Stack.Navigator>
   
    
   </NavigationContainer>
+  </>
+
   );
 }
- {/* <View style={styles.main_page}>
-        <CardList navigation={undefined} handleClick={undefined}/>
-        {/* <Text>kkjkkjkkjkjkjksd</Text> */}
-        {/* </View> */} 
 const styles = StyleSheet.create({
   main_page: {
   //  width:width,
-  //   marginTop:100,
-  //   flex: 1,
-  //   height:height,
-  //   alignItems: "center",
-  //   backgroundColor: "black",
+    // marginTop:100,
+    // flex: 1,
+    // height:height,
+    // alignItems: "center",
+    // backgroundColor: "black",
   },
 });

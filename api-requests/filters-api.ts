@@ -1,6 +1,8 @@
+import { url_ngrok } from ".";
 
-export const filtersByTags = async(tag:string)=>{
-    const response = await fetch(`http://localhost:1337/api/foods?populate=*&filters[category][id][$eqi]=${tag}`,{method:'GET'});
+export const filtersByTags = async(id:string)=>{
+    console.log(id)
+    const response = await fetch(`${url_ngrok}api/foods?populate=*&filters[categories][id][$eqi]=${id}`,{method:'GET'});
     const data = await response.json();
     const filteredData = data.data
     return filteredData;

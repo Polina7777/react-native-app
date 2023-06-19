@@ -36,7 +36,6 @@ export default function Card({
   return (
     <View style={styles.card__wrapper}>
       <ImageComponent urlImage={imageUrl} />
-      <View></View>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.card_info__wrapper}>
         {/* <View style={styles.options__wrapper}>
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     fontSize: 12,
     fontWeight: "bold",
-    minHeight: 150,
+    minHeight: 170,
     borderWidth: 1,
     borderColor: "#D6FC51",
     color: "#D6FC51",
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     textAlign: "center",
     width: tag_width,
+    marginBottom:10
   },
   title: {
     fontSize: 10,
@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   description: {
-    display: "flex",
+
   },
 });

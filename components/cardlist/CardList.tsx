@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { View,Text} from "../../components/Themed";
 import Card from "../../components/card/Card";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import DetailedCard from "../detailed-card/DetailedCard";
 import NavigateBar from "../navigate-bar/NavigateBar";
 import { recipesApi } from "../../api-requests/recipes-api";
@@ -16,31 +16,41 @@ import { filtersApi } from "../../api-requests/filters-api";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { JumpingTransition } from "react-native-reanimated";
+import { SplashScreen } from "expo-router";
 
 export interface ICard {
-  title: string;
-  options?: string[];
-  description: string;
-  imageUrl?: string;
+  id:number,
+  attributes:IAttributes
+  // title: string;
+  // options?: string[];
+  // description: string;
+  // imageUrl?: string;
+}
+export interface IAttributes {
+title:string,
+description:string,
+ingredients:any,
+image_url:any,
+id:number|string
 }
 export interface CardListProps {
   cardList: any;
   handleCardPress: any;
   navigation?: any;
 }
-// const { height } = Dimensions.get("window");
-// const box_height = height;
-// const { width } = Dimensions.get("window");
-// const box_width = width - 20;
-const { height } = Dimensions.get("screen");
-const { width } = Dimensions.get("screen");
+const { height } = Dimensions.get("window");
+const box_height = height;
+const { width } = Dimensions.get("window");
+const box_width = width - 20;
+// const { height } = Dimensions.get("screen");
+// const { width } = Dimensions.get("screen");
 
 export default function CardList({handleClick,navigation}:any) {
   const [showDetailedCard, setShowDetailedCard] = useState(false);
   const [cardId, setCardId] = useState("");
   const [detailedCardInfo, setDetailedCardInfo] = useState();
   const [tags, setTags] = useState();
-
   const [cardList, setCardList] = useState([]);
 
   const getCardsInfo = async () => {
@@ -77,34 +87,23 @@ export default function CardList({handleClick,navigation}:any) {
       console.log(err);
     }
   };
-  // const getDetailedCardInfo = async (id: string) => {
-  //   try {
-  //     const info = await recipesApi.getRecipeById(id);
-  //     setDetailedCardInfo(info);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
-  // const cardClick = (id: string) => {
-  //   // setShowDetailedCard(true);
-  //   getDetailedCardInfo(id);
-  //   navigation.navigate('Card')
-  // };
   useEffect(() => {
     getCategories();
   }, []);
 
+
+
+  
+
   return (
     <View style={styles.card_list_wrapper}>
-   
-    <Text>kjjkjkkjk7676666766jksjkf</Text>
      <NavigateBar tags={tags} handleTagClick={handleTagClick} />
      
       <View style={styles.container}>
         <SafeAreaView>
         <ScrollView style={styles.scroll_wrapper}>
-          {cardList.map((item, index) => {
+          {cardList.map((item:ICard, index) => {
             return (
               <TouchableOpacity key={index} style={styles.container}>
                 <Pressable
@@ -118,7 +117,7 @@ export default function CardList({handleClick,navigation}:any) {
                     description={item.attributes.description}
                     options={item.attributes.ingredients}
                     imageUrl={item.attributes.image_url}
-                    id={item.attributes.id}
+                    id={item.id}
                     key={index}
                   />
                 </Pressable>
@@ -135,31 +134,19 @@ export default function CardList({handleClick,navigation}:any) {
 const styles = StyleSheet.create({
   container: {
   flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
+   alignItems: "center",
     backgroundColor: "black",
-    height:height,
-   
-    // height: box_height,
+  //  height:height,
     width: width,
   },
   scroll_wrapper: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
     backgroundColor: "black",
-    height:height
-    // padding: 10,
-    // height: box_height,
-    // width: width,
+    height:height,
+    width: width,
   },
   card_list_wrapper: {
-    // flexDirection: "column",
-    // backgroundColor: "black",
-    // justifyContent: "space-between",
-    // marginVertical: 10,
-    // height:box_height,
-    // width:box_width,
+    height:height,
   },
   title: {
     fontSize: 20,
