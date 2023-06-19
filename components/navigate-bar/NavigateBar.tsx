@@ -22,10 +22,6 @@ export default function NavigateBar({
   handleTagClick,
 }: NavigateBarProps) {
 
-  const handleAllTagClick =() =>{
-    console.log('all')
-  }
-
 
   return tags ? (
      <View style={styles.navigate__wrapper}>
@@ -63,12 +59,11 @@ const styles = StyleSheet.create({
   },
 
   navigate__wrapper: {
-    // backgroundColor: "transition",
-    // alignContent: "center",
+
   },
   scroll_view: {
     backgroundColor: "black",
     width: width,
-    // paddingVertical: 20,
+  
   },
 });

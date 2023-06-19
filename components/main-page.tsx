@@ -39,9 +39,8 @@ export default function MainPage() {
   //   getCardsInfo();
   // }, []);
   const cardClick = (id: string) => {
-    // setShowDetailedCard(true);
+  
     getDetailedCardInfo(id);
-    // navigation.navigate('Card')
   };
   const getDetailedCardInfo = async (id: string) => {
     try {
@@ -63,8 +62,8 @@ export default function MainPage() {
         // headerMode: 'screen',
         // headerShown: false,
         // headerTransparent: true,
-        headerTintColor: "white",
-        headerStyle: { backgroundColor: "tomato" },
+        headerTintColor: "#D6FC51",
+        headerStyle: { backgroundColor: "black" },
       }} 
     >
       <Stack.Screen name="General">

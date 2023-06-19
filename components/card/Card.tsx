@@ -24,14 +24,8 @@ export default function Card({
   options,
   imageUrl,
 }: CardProps) {
-  let optionsList;
-  const optionsFunction = () => {
-    if (options) {
-      optionsList = options.split(",");
-    } else {
-      null;
-    }
-  };
+
+
 
   return (
     <View style={styles.card__wrapper}>
@@ -58,7 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     fontSize: 12,
     fontWeight: "bold",
-    minHeight: 170,
+    minHeight: 250,
     borderWidth: 1,
     borderColor: "#D6FC51",
     color: "#D6FC51",
@@ -71,8 +65,10 @@ const styles = StyleSheet.create({
     marginBottom:10
   },
   title: {
-    fontSize: 10,
+    fontSize: 17,
     fontWeight: "bold",
+    color: "#D6FC51",
+    paddingVertical:10
   },
   card_info__wrapper: {
     flexDirection: "column",
@@ -86,6 +82,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   description: {
-
+    color: "#D6FC51",
   },
 });
