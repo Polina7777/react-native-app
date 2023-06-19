@@ -1,11 +1,11 @@
 import {
-  Dimensions,
   Pressable,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
 import { Text, View } from "../../components/Themed";
+import { widthScreen } from "../../constants/Sizes";
 
 export interface NavigateBarProps {
   tags: any;
@@ -35,7 +35,7 @@ export default function NavigateBar({
   );
 }
 
-const { width } = Dimensions.get("screen");
+const { width } = widthScreen;
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     minWidth: 150,
     borderWidth: 1,
-    borderColor: "#D6FC51",
-    color: "#D6FC51",
+    borderColor: "#cfe38a",
+    color: "#cfe38a",
     borderRadius: 10,
     paddingVertical: 3,
     textAlign: "center",
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 
   navigate__wrapper: {},
   scroll_view: {
-    backgroundColor: "black",
+    backgroundColor: "#11151E",
     width: width,
   },
 });

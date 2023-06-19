@@ -27,7 +27,7 @@ export interface ICard {
 export interface IAttributes {
   title: string;
   description: string;
-  ingredients: any;
+  small_extra_info: any;
   image_url: any;
   id: number | string;
 }
@@ -38,13 +38,12 @@ export interface CardListProps {
 }
 
 export default function CardList({ handleClick, navigation }: any) {
-
   const [tags, setTags] = useState();
   const [cardList, setCardList] = useState([]);
 
   const getCardsInfo = async () => {
     try {
-      const info = await recipesApi.getAllRecipes();
+      const info = await recipesApi.getAllRecipesWithIngredientCollection();
       setCardList(info);
     } catch (err) {
       console.log(err);
@@ -100,7 +99,7 @@ export default function CardList({ handleClick, navigation }: any) {
                     <Card
                       title={item.attributes.title}
                       description={item.attributes.description}
-                      options={item.attributes.ingredients}
+                      options={item.attributes.small_extra_info.data.attributes}
                       imageUrl={item.attributes.image_url}
                       id={item.id}
                       key={index}
@@ -115,22 +114,23 @@ export default function CardList({ handleClick, navigation }: any) {
     </View>
   );
 }
-
+const { width } = widthScreen;
+const { height } = heightScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "black",
-    width: `${widthScreen}`,
+    backgroundColor: "#11151E",
+    width: width,
   },
   scroll_wrapper: {
     flex: 1,
-    backgroundColor: "black",
-    height: `${heightScreen}`,
-    width: `${widthScreen}`,
+    backgroundColor: "#11151E",
+    height: height,
+    width: width,
   },
   card_list_wrapper: {
-    height: `${heightScreen}`,
+    height: height,
   },
   title: {
     fontSize: 20,

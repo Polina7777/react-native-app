@@ -33,8 +33,8 @@ export default function MainPage() {
             // headerMode: 'screen',
             // headerShown: false,
             // headerTransparent: true,
-            headerTintColor: "#D6FC51",
-            headerStyle: { backgroundColor: "black" },
+            headerTintColor: "#cfe38a",
+            headerStyle: { backgroundColor:"#11151E"},
           }}
         >
           <Stack.Screen name="General">
