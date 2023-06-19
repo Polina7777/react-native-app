@@ -11,20 +11,13 @@ export interface NavigateBarProps {
   tags: any;
   handleTagClick: any;
 }
-const { height } = Dimensions.get("screen");
-const { width } = Dimensions.get("screen");
-// const { width } = Dimensions.get('window');
-const box_count = 3;
-const tag_width = width / box_count;
 
 export default function NavigateBar({
   tags,
   handleTagClick,
 }: NavigateBarProps) {
-
-
   return tags ? (
-     <View style={styles.navigate__wrapper}>
+    <View style={styles.navigate__wrapper}>
       <ScrollView horizontal={true} style={styles.scroll_view}>
         {tags.map((item, index: number) => {
           return (
@@ -36,19 +29,22 @@ export default function NavigateBar({
           );
         })}
       </ScrollView>
-     </View>
-  ) : <View></View>;
+    </View>
+  ) : (
+    <View></View>
+  );
 }
 
+const { width } = Dimensions.get("screen");
 const styles = StyleSheet.create({
   container: {
-    paddingTop:20,
-    alignItems:'center',
+    paddingTop: 20,
+    alignItems: "center",
   },
   navigate_tag: {
     fontSize: 21,
     fontWeight: "bold",
-    width: tag_width,
+    minWidth: 150,
     borderWidth: 1,
     borderColor: "#D6FC51",
     color: "#D6FC51",
@@ -58,12 +54,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 7,
   },
 
-  navigate__wrapper: {
-
-  },
+  navigate__wrapper: {},
   scroll_view: {
     backgroundColor: "black",
     width: width,
-  
   },
 });

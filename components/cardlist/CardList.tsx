@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { View,Text} from "../../components/Themed";
+import { View, Text } from "../../components/Themed";
 import Card from "../../components/card/Card";
 import React, { useCallback, useEffect, useState } from "react";
 import DetailedCard from "../detailed-card/DetailedCard";
@@ -18,38 +18,27 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { JumpingTransition } from "react-native-reanimated";
 import { SplashScreen } from "expo-router";
+import { heightScreen, widthScreen } from "../../constants/Sizes";
 
 export interface ICard {
-  id:number,
-  attributes:IAttributes
-  // title: string;
-  // options?: string[];
-  // description: string;
-  // imageUrl?: string;
+  id: number;
+  attributes: IAttributes;
 }
 export interface IAttributes {
-title:string,
-description:string,
-ingredients:any,
-image_url:any,
-id:number|string
+  title: string;
+  description: string;
+  ingredients: any;
+  image_url: any;
+  id: number | string;
 }
 export interface CardListProps {
   cardList: any;
   handleCardPress: any;
   navigation?: any;
 }
-const { height } = Dimensions.get("window");
-const box_height = height;
-const { width } = Dimensions.get("window");
-const box_width = width - 20;
-// const { height } = Dimensions.get("screen");
-// const { width } = Dimensions.get("screen");
 
-export default function CardList({handleClick,navigation}:any) {
-  const [showDetailedCard, setShowDetailedCard] = useState(false);
-  const [cardId, setCardId] = useState("");
-  const [detailedCardInfo, setDetailedCardInfo] = useState();
+export default function CardList({ handleClick, navigation }: any) {
+
   const [tags, setTags] = useState();
   const [cardList, setCardList] = useState([]);
 
@@ -92,39 +81,35 @@ export default function CardList({handleClick,navigation}:any) {
     getCategories();
   }, []);
 
-
-
-  
-
   return (
     <View style={styles.card_list_wrapper}>
-     <NavigateBar tags={tags} handleTagClick={handleTagClick} />
-     
+      <NavigateBar tags={tags} handleTagClick={handleTagClick} />
+
       <View style={styles.container}>
         <SafeAreaView>
-        <ScrollView style={styles.scroll_wrapper}>
-          {cardList.map((item:ICard, index) => {
-            return (
-              <TouchableOpacity key={index} style={styles.container}>
-                <Pressable
-                  onPress={() => {
-                    handleClick(item.id);
-                    navigation.navigate("Card");
-                  }}
-                >
-                  <Card
-                    title={item.attributes.title}
-                    description={item.attributes.description}
-                    options={item.attributes.ingredients}
-                    imageUrl={item.attributes.image_url}
-                    id={item.id}
-                    key={index}
-                  />
-                </Pressable>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
+          <ScrollView style={styles.scroll_wrapper}>
+            {cardList.map((item: ICard, index) => {
+              return (
+                <TouchableOpacity key={index} style={styles.container}>
+                  <Pressable
+                    onPress={() => {
+                      handleClick(item.id);
+                      navigation.navigate("Card");
+                    }}
+                  >
+                    <Card
+                      title={item.attributes.title}
+                      description={item.attributes.description}
+                      options={item.attributes.ingredients}
+                      imageUrl={item.attributes.image_url}
+                      id={item.id}
+                      key={index}
+                    />
+                  </Pressable>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
         </SafeAreaView>
       </View>
     </View>
@@ -133,20 +118,19 @@ export default function CardList({handleClick,navigation}:any) {
 
 const styles = StyleSheet.create({
   container: {
-  flex: 1,
-   alignItems: "center",
+    flex: 1,
+    alignItems: "center",
     backgroundColor: "black",
-  //  height:height,
-    width: width,
+    width: `${widthScreen}`,
   },
   scroll_wrapper: {
     flex: 1,
     backgroundColor: "black",
-    height:height,
-    width: width,
+    height: `${heightScreen}`,
+    width: `${widthScreen}`,
   },
   card_list_wrapper: {
-    height:height,
+    height: `${heightScreen}`,
   },
   title: {
     fontSize: 20,
