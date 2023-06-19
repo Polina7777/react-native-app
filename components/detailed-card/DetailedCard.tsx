@@ -50,9 +50,8 @@ export default function DetailedCard({ data, navigation }: any) {
 
   return data ? (
     <View style={styles.container}>
-      <ScrollView style={styles.detailed_card_scroll__wrapper}>
+      <ScrollView >
         <ImageComponentDetailedCard urlImage={data.attributes.image_url} />
-        {/* <View style={styles.info__wrapper}> */}
         <View style={styles.context__wrapper}>
           <View style={styles.extra_info__wrapper}>
             {extraInfo.map((item,index)=>{
@@ -62,7 +61,7 @@ export default function DetailedCard({ data, navigation }: any) {
             })}
           </View>
           <View style={styles.constituents__wrapper}>
-            <ScrollView horizontal={true}>
+            <ScrollView horizontal={true} centerContent={true} style={styles.scroll_wrapper} >
               {ingredients.map((item, index) => {
                 return (
                   <Text style={styles.constituents__item} key={index}>
@@ -79,7 +78,6 @@ export default function DetailedCard({ data, navigation }: any) {
             </Text>
           </View>
         </View>
-        {/* </View> */}
       </ScrollView>
     </View>
   ) : (
@@ -94,43 +92,46 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#11151E",
   },
-  detailed_card_scroll__wrapper: {
-    //  alignItems:'center',
-    //  justifyContent:'center'
+  scroll_wrapper:{
+   marginVertical:20
   },
   info__wrapper: {
     flexDirection: "column",
-    gap: 20,
+
     backgroundColor: "transition",
     fontSize: 12,
     fontWeight: "bold",
+    justifyContent:'center'
   },
   addition_info__wrapper: {
-    flexDirection: "row",
-    gap: 20,
+    justifyContent:'center',
     width: width,
   },
   additional_item: {
     color: "#cfe38a",
     padding: 10,
-    gap: 20,
+
   },
   context__wrapper: {
     display: "flex",
     backgroundColor: "transition",
-    gap: 10,
+    justifyContent:'center'
+
   },
   constituents__wrapper: {
     backgroundColor: "transition",
     alignItems: "center",
     flexDirection: "row",
     width: width - 40,
+    // alignSelf:'center',
+    justifyContent:'center',
   },
   extra_info__wrapper:{
     backgroundColor: "transition",
     alignItems: "center",
     flexDirection: "row",
     width: width - 100,
+    maxWidth:450,
     borderWidth: 1,
     borderColor: "#cfe38a",
     borderRadius: 25,
@@ -157,7 +158,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "#cfe38a",
   width:width/9,
-    // minWidth:43,
     textAlign:'center'
   },
   detailed_description__wrapper: {
