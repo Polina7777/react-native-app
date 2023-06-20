@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     width: width - 40,
-    // alignSelf:'center',
     justifyContent: "center",
   },
   extra_info__wrapper: {

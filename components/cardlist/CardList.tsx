@@ -49,10 +49,10 @@ export default function CardList({ handleClick, navigation }: any) {
 
   const getCardsInfo = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const info = await recipesApi.getAllRecipesWithIngredientCollection();
       setCardList(info);
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -69,10 +69,10 @@ export default function CardList({ handleClick, navigation }: any) {
   }, [currentTag]);
   const filterByTag = async (tag: string) => {
     try {
-      setLoading(true)
+      setLoading(true);
       const filteredList = await filtersApi.filtersByTags(tag);
       setCardList(filteredList);
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -84,16 +84,15 @@ export default function CardList({ handleClick, navigation }: any) {
 
   const getCategories = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const tagsList = await categoryApi.getCategoriesOfRecipes();
       setTags(tagsList);
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
   return (
-    
     <View style={styles.card_list_wrapper}>
       <View style={styles.user_wrapper}>
         <Text style={styles.hello_user}>Hello,User!</Text>
@@ -108,7 +107,6 @@ export default function CardList({ handleClick, navigation }: any) {
               currentTag ? currentTag?.attributes.name : "All"
             }`}
           </Text>
-          <SafeAreaView>
             <ScrollView style={styles.scroll_wrapper}>
               {cardList.map((item: ICard, index) => {
                 return (
@@ -136,7 +134,6 @@ export default function CardList({ handleClick, navigation }: any) {
                 );
               })}
             </ScrollView>
-          </SafeAreaView>
         </View>
       ) : (
         <Loader />
@@ -148,15 +145,14 @@ const { width } = widthScreen;
 const { height } = heightScreen;
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
+     flex: 1,
+     alignItems: "center",
     backgroundColor: "#11151E",
     width: width,
   },
   scroll_wrapper: {
     flex: 1,
     backgroundColor: "#11151E",
-    height: height,
     width: width,
   },
   user_wrapper: {
@@ -164,18 +160,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: width,
     justifyContent: "space-between",
-    padding: 20,
+    paddingHorizontal: 20,
+    height: 170,
+    maxHeight: 180,
+    paddingTop:10
   },
   card_list_wrapper: {
     height: height,
   },
   count_of_recipes: {
-    fontSize: 35,
+    fontSize: 25,
     fontWeight: "600",
     color: "#cfe38a",
-    alignSelf: "flex-start",
-    paddingVertical: 20,
-    paddingHorizontal: 20,
+     alignSelf: "flex-start",
+     padding: 15,
   },
   title: {
     fontSize: 20,
@@ -183,16 +181,18 @@ const styles = StyleSheet.create({
   },
   user_photo: {
     backgroundColor: "#cfe38a",
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignSelf: "center",
+    paddingVertical: 10,
   },
   hello_user: {
     color: "#cfe38a",
-    fontSize: 40,
+    fontSize: 20,
     fontWeight: "600",
     justifyContent: "space-between",
     alignSelf: "center",
-    width: "50%",
+    width: width/2,
   },
 });

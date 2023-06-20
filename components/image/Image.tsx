@@ -4,10 +4,9 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   image_food: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    margin: 10,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
   },
 
 });

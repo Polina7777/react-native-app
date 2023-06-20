@@ -57,35 +57,44 @@ const styles = StyleSheet.create({
   },
   modal: {
     justifyContent: "flex-end",
-    marginHorizontal: 35,
+    marginHorizontal: 10,
+    width:width-20,
+    alignItems:'center',
+  
+  
   },
   modalContent: {
-    // backgroundColor: "#11151E",
-    backgroundColor:'transition',
+    backgroundColor: "blue",
+    // backgroundColor:'transition',
     paddingTop: 12,
-    paddingHorizontal: 30,
+ 
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    minHeight: 400,
-    maxHeight:height/3,
-    paddingBottom: 20,
+    minHeight: 350,
+    maxHeight:height/2.7,
+    paddingBottom: 10,
+    width:width-30,
+
+    
+    
   },
   center: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-     paddingHorizontal:30
+     paddingHorizontal:10,
+
   },
   barIcon: {
-    width: 60,
+    width: 40,
     height: 5,
     backgroundColor: "#bbb",
     borderRadius: 3,
   },
   text: {
     color: "#bbb",
-    fontSize: 24,
-    marginTop: 50,
+    fontSize: 17,
+    marginTop: 20,
   },
   btnContainer: {
     display: "flex",

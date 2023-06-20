@@ -38,13 +38,12 @@ export default function NavigateBar({
 const { width } = widthScreen;
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
     alignItems: "center",
   },
   navigate_tag: {
-    fontSize: 21,
+    fontSize: 17,
     fontWeight: "bold",
-    minWidth: 150,
+    minWidth: 120,
     borderWidth: 1,
     borderColor: "#cfe38a",
     color: "#cfe38a",

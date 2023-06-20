@@ -5,9 +5,9 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
 
   image_detailed: {
-    width: 250,
-    height: 250,
-    borderRadius: 125,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
     margin: 10,
     alignSelf:'center'
   },

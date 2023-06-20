@@ -1,4 +1,4 @@
-import {  StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import CardList from "./cardlist/CardList";
 import DetailedCard from "./detailed-card/DetailedCard";
 import { useState } from "react";
@@ -6,30 +6,39 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { recipesApi } from "../api-requests/recipes-api";
 import "react-native-gesture-handler";
-import { Text} from "./Themed";
+import { Text } from "./Themed";
 import Loader from "./loader/Loader";
 
 export default function MainPage() {
-
   const Stack = createNativeStackNavigator();
 
   return (
     <>
-      <NavigationContainer fallback={<Loader/>}>
+      <NavigationContainer fallback={<Loader />}>
         <Stack.Navigator
           screenOptions={{
-            // headerMode: 'screen',
+          //  headerMode: 'screen',
             // headerShown: false,
-            headerTransparent: true,
+            // headerTransparent: true,
+            gestureEnabled:true,
+            headerTransparent: false,
             headerTintColor: "#cfe38a",
-            headerStyle: { backgroundColor:"#11151E"},
+            headerStyle: { backgroundColor: "#11151E" },
           }}
         >
-          <Stack.Screen name="General" options={{title:''}} >
-            {(props) => <CardList {...props}  />}
+          <Stack.Screen name="General" 
+          options={{ title: "knknkk" ,
+        headerShown:false}}
+          >
+            {(props) => <CardList {...props} />}
           </Stack.Screen>
 
-          <Stack.Screen name="Card" >
+          <Stack.Screen
+            name="Card"
+            options={{
+              headerLeft: () => null,
+            }}
+          >
             {(props) => <DetailedCard {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
