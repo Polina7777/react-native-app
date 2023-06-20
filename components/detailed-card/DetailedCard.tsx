@@ -63,43 +63,22 @@ export default function DetailedCard({ navigation, route }: any) {
 
   return recipe ? (
     <View style={styles.container}>
-         
-      <ScrollView>
-        <ImageComponentDetailedCard urlImage={recipe.attributes.image_url} />
-        <View style={styles.context__wrapper}>
-          <View style={styles.extra_info__wrapper}>
-            {extraInfo.map((item, index) => {
-              return (
-                <Text key={index} style={styles.extra_info__item}>
-                  {item}
-                </Text>
-              );
-            })}
-          </View>
-          <View style={styles.constituents__wrapper}>
-            <ScrollView
-              horizontal={true}
-              centerContent={true}
-              style={styles.scroll_wrapper}
-            >
-              {ingredients.map((item, index) => {
-                return (
-                  <Text style={styles.constituents__item} key={index}>
-                    {item.attributes.ingredient}
-                  </Text>
-                );
-              })}
-            </ScrollView>
-          </View>
-          <BottomModal data={recipe.attributes.process}/>
-          {/* <View style={styles.detailed_description__wrapper}>
-            <Text style={styles.detail_description__item}>
-              {recipe.attributes.process}
-            </Text>
-          </View> */}
+      <ImageComponentDetailedCard urlImage={recipe.attributes.image_url} />
+      <View style={styles.context__wrapper}>
+        <View style={styles.extra_info__wrapper}>
+          {extraInfo.map((item, index) => {
+            return (
+              <Text key={index} style={styles.extra_info__item}>
+                {item}
+              </Text>
+            );
+          })}
         </View>
-      </ScrollView>
-  
+        <BottomModal
+          data={recipe.attributes.process}
+          ingredients={ingredients}
+        />
+      </View>
 
     </View>
   ) : (
@@ -113,10 +92,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#11151E",
-    paddingTop:70
-  },
-  scroll_wrapper: {
-    marginVertical: 20,
+    paddingTop: 100,
   },
   info__wrapper: {
     flexDirection: "column",
@@ -139,13 +115,13 @@ const styles = StyleSheet.create({
     backgroundColor: "transition",
     justifyContent: "center",
   },
-  constituents__wrapper: {
-    backgroundColor: "transition",
-    alignItems: "center",
-    flexDirection: "row",
-    width: width - 40,
-    justifyContent: "center",
-  },
+  // constituents__wrapper: {
+  //   backgroundColor: "transition",
+  //   alignItems: "center",
+  //   flexDirection: "row",
+  //   width: width - 40,
+  //   justifyContent: "center",
+  // },
   extra_info__wrapper: {
     backgroundColor: "transition",
     alignItems: "center",
@@ -155,24 +131,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#cfe38a",
     borderRadius: 25,
-    paddingHorizontal: 25,
-    paddingVertical: 25,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
     justifyContent: "space-between",
     alignSelf: "center",
   },
-  constituents__item: {
-    fontSize: 15,
-    borderWidth: 1,
-    borderColor: "#cfe38a",
-    color: "#cfe38a",
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    textAlign: "center",
-    alignSelf: "center",
-    width: 100,
-    marginHorizontal: 5,
-  },
+  // constituents__item: {
+  //   fontSize: 11,
+  //   borderWidth: 1,
+  //   borderColor: "#cfe38a",
+  //   color: "#cfe38a",
+  //   borderRadius: 15,
+  //   paddingHorizontal: 5,
+  //   paddingVertical: 10,
+  //   textAlign: "center",
+  //   alignSelf: "center",
+  //   width: 100,
+  //   marginHorizontal: 5,
+  // },
   extra_info__item: {
     fontSize: 15,
     color: "#cfe38a",
