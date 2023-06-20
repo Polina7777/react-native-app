@@ -21,8 +21,8 @@ export default function NavigateBar({
       <ScrollView horizontal={true} style={styles.scroll_view}>
         {tags.map((item, index: number) => {
           return (
-            <TouchableOpacity key={index} style={styles.container}>
-              <Pressable onPress={() => handleTagClick(item.id)}>
+            <TouchableOpacity key={item.id} style={styles.container}>
+              <Pressable onPress={() => handleTagClick(item)}>
                 <Text style={styles.navigate_tag}>{item.attributes.name}</Text>
               </Pressable>
             </TouchableOpacity>

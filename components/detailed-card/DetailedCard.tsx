@@ -1,10 +1,11 @@
-import { ScrollView, StyleSheet } from "react-native";
+import { Button, ScrollView, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { ImageComponentDetailedCard } from "../image/ImageDetailed";
 import Loader from "../loader/Loader";
 import { ingredientsApi } from "../../api-requests/ingredients-api";
 import { useEffect, useState } from "react";
 import { widthScreen } from "../../constants/Sizes";
+import { recipesApi } from "../../api-requests/recipes-api";
 
 export interface IDetailedCardData {
   additionalInfo: string[];
@@ -17,51 +18,66 @@ export interface DetailedCardProps {
   navigation: any;
 }
 
-export default function DetailedCard({ data, navigation }: any) {
+export default function DetailedCard({ navigation, route }: any) {
   const [ingredients, setIngredients] = useState([]);
-  const [extraInfo, setExtraInfo] = useState([]);
-  console.log(extraInfo,'extra')
-  const getIngredients = async () => {
-    const extraInfoArray = [
-      data.attributes.extra_info.data.attributes.min,
-      data.attributes.extra_info.data.attributes.grams,
-      data.attributes.extra_info.data.attributes.kcal,
-      data.attributes.extra_info.data.attributes.serve,
-    ];
+  const [extraInfo, setExtraInfo] = useState<string[]>([]);
+  const [recipe, setRecipe] = useState();
 
-    setExtraInfo(extraInfoArray);
-    const ingredientCollectionId =
-      data.attributes.ingredient_collection.data.id;
+  const getDetailedCardInfo = async () => {
     try {
-      const ingredientsList =
+      const recipe = await recipesApi.getRecipeByIdWithIngredientCollection(
+        route.params.itemId
+      );
+      const ingredients =
         await ingredientsApi.getIngredientCollectionByIdWithIngredients(
-          ingredientCollectionId
+          recipe.attributes.ingredient_collection.data.id
         );
-      setIngredients(ingredientsList.attributes.ingredients.data);
+
+      const extraInfoArray = [
+        recipe.attributes.extra_info.data.attributes.min,
+        recipe.attributes.extra_info.data.attributes.grams,
+        recipe.attributes.extra_info.data.attributes.kcal,
+        recipe.attributes.extra_info.data.attributes.serve,
+      ];
+
+      setIngredients(ingredients.attributes.ingredients.data);
+      setExtraInfo(extraInfoArray);
+      setRecipe(recipe);
     } catch (err) {
       console.log(err);
-      <Loader />;
     }
   };
 
   useEffect(() => {
-    getIngredients();
-  }, [data]);
+    navigation.setOptions({
+      title: route.params.title,
+    });
+  }, [navigation]);
 
-  return data ? (
+  useEffect(() => {
+    getDetailedCardInfo();
+  }, []);
+
+  return recipe ? (
     <View style={styles.container}>
-      <ScrollView >
-        <ImageComponentDetailedCard urlImage={data.attributes.image_url} />
+      <ScrollView>
+        <ImageComponentDetailedCard urlImage={recipe.attributes.image_url} />
         <View style={styles.context__wrapper}>
           <View style={styles.extra_info__wrapper}>
-            {extraInfo.map((item,index)=>{
-              return <Text key={index} style={styles.extra_info__item}>
-                {item}
-              </Text>
+            {extraInfo.map((item, index) => {
+              return (
+                <Text key={index} style={styles.extra_info__item}>
+                  {item}
+                </Text>
+              );
             })}
           </View>
           <View style={styles.constituents__wrapper}>
-            <ScrollView horizontal={true} centerContent={true} style={styles.scroll_wrapper} >
+            <ScrollView
+              horizontal={true}
+              centerContent={true}
+              style={styles.scroll_wrapper}
+            >
               {ingredients.map((item, index) => {
                 return (
                   <Text style={styles.constituents__item} key={index}>
@@ -74,7 +90,7 @@ export default function DetailedCard({ data, navigation }: any) {
 
           <View style={styles.detailed_description__wrapper}>
             <Text style={styles.detail_description__item}>
-              {data.attributes.process}
+              {recipe.attributes.process}
             </Text>
           </View>
         </View>
@@ -91,9 +107,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#11151E",
+    paddingTop:70
   },
-  scroll_wrapper:{
-   marginVertical:20
+  scroll_wrapper: {
+    marginVertical: 20,
   },
   info__wrapper: {
     flexDirection: "column",
@@ -101,22 +118,20 @@ const styles = StyleSheet.create({
     backgroundColor: "transition",
     fontSize: 12,
     fontWeight: "bold",
-    justifyContent:'center'
+    justifyContent: "center",
   },
   addition_info__wrapper: {
-    justifyContent:'center',
+    justifyContent: "center",
     width: width,
   },
   additional_item: {
     color: "#cfe38a",
     padding: 10,
-
   },
   context__wrapper: {
     display: "flex",
     backgroundColor: "transition",
-    justifyContent:'center'
-
+    justifyContent: "center",
   },
   constituents__wrapper: {
     backgroundColor: "transition",
@@ -124,22 +139,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: width - 40,
     // alignSelf:'center',
-    justifyContent:'center',
+    justifyContent: "center",
   },
-  extra_info__wrapper:{
+  extra_info__wrapper: {
     backgroundColor: "transition",
     alignItems: "center",
     flexDirection: "row",
     width: width - 100,
-    maxWidth:450,
+    maxWidth: 450,
     borderWidth: 1,
     borderColor: "#cfe38a",
     borderRadius: 25,
     paddingHorizontal: 25,
     paddingVertical: 25,
-    justifyContent:'space-between',
-    alignSelf:'center'
-  
+    justifyContent: "space-between",
+    alignSelf: "center",
   },
   constituents__item: {
     fontSize: 15,
@@ -154,11 +168,11 @@ const styles = StyleSheet.create({
     width: 100,
     marginHorizontal: 5,
   },
-  extra_info__item:{
+  extra_info__item: {
     fontSize: 15,
     color: "#cfe38a",
-  width:width/9,
-    textAlign:'center'
+    width: width / 9,
+    textAlign: "center",
   },
   detailed_description__wrapper: {
     backgroundColor: "transition",

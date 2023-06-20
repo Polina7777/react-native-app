@@ -7,42 +7,30 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { recipesApi } from "../api-requests/recipes-api";
 import "react-native-gesture-handler";
 import { Text} from "./Themed";
+import Loader from "./loader/Loader";
 
 export default function MainPage() {
-  const [detailedCardInfo, setDetailedCardInfo] = useState();
-
-  const cardClick = (id: string) => {
-    getDetailedCardInfo(id);
-  };
-  const getDetailedCardInfo = async (id: string) => {
-    try {
-      const info = await recipesApi.getRecipeByIdWithIngredientCollection(id);
-      setDetailedCardInfo(info);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const Stack = createNativeStackNavigator();
 
   return (
     <>
-      <NavigationContainer fallback={<Text>Loading...</Text>}>
+      <NavigationContainer fallback={<Loader/>}>
         <Stack.Navigator
           screenOptions={{
             // headerMode: 'screen',
             // headerShown: false,
-            // headerTransparent: true,
+            headerTransparent: true,
             headerTintColor: "#cfe38a",
             headerStyle: { backgroundColor:"#11151E"},
           }}
         >
-          <Stack.Screen name="General">
-            {(props) => <CardList {...props} handleClick={cardClick} />}
+          <Stack.Screen name="General" options={{title:''}} >
+            {(props) => <CardList {...props}  />}
           </Stack.Screen>
 
-          <Stack.Screen name="Card">
-            {(props) => <DetailedCard {...props} data={detailedCardInfo} />}
+          <Stack.Screen name="Card" >
+            {(props) => <DetailedCard {...props} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
