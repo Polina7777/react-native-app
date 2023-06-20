@@ -3,9 +3,12 @@ import { Text, View } from "../../components/Themed";
 import { ImageComponentDetailedCard } from "../image/ImageDetailed";
 import Loader from "../loader/Loader";
 import { ingredientsApi } from "../../api-requests/ingredients-api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { widthScreen } from "../../constants/Sizes";
 import { recipesApi } from "../../api-requests/recipes-api";
+import BottomModal from "../bottom-sheet-modal/BottomSheetModal";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export interface IDetailedCardData {
   additionalInfo: string[];
@@ -60,6 +63,7 @@ export default function DetailedCard({ navigation, route }: any) {
 
   return recipe ? (
     <View style={styles.container}>
+         
       <ScrollView>
         <ImageComponentDetailedCard urlImage={recipe.attributes.image_url} />
         <View style={styles.context__wrapper}>
@@ -87,14 +91,16 @@ export default function DetailedCard({ navigation, route }: any) {
               })}
             </ScrollView>
           </View>
-
-          <View style={styles.detailed_description__wrapper}>
+          <BottomModal data={recipe.attributes.process}/>
+          {/* <View style={styles.detailed_description__wrapper}>
             <Text style={styles.detail_description__item}>
               {recipe.attributes.process}
             </Text>
-          </View>
+          </View> */}
         </View>
       </ScrollView>
+  
+
     </View>
   ) : (
     <Loader />
