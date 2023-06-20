@@ -20,6 +20,9 @@
       "relation": "manyToMany",
       "target": "api::food.food",
       "mappedBy": "categories"
+    },
+    "image_url": {
+      "type": "string"
     }
   }
 }

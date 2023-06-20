@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Modal from "react-native-modal";
 import { widthScreen, heightScreen } from "../../constants/Sizes";
+import { backgroundSecondary, borderColor, textPrimary } from "../../constants/Colors";
 
 function BottomModal({ data, ingredients}) {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   modalContent: {
-    backgroundColor: "#302137",
+    backgroundColor: backgroundSecondary,
     borderRadius: 20,
     // borderTopLeftRadius: 20,
     minHeight: 300,
@@ -134,8 +135,8 @@ const styles = StyleSheet.create({
   constituents__item: {
     fontSize: 11,
     borderWidth: 1,
-    borderColor: "#cfe38a",
-    color: "#cfe38a",
+    borderColor: borderColor,
+    color: textPrimary,
     borderRadius: 15,
     paddingHorizontal: 5,
     paddingVertical: 10,

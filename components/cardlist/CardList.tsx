@@ -23,6 +23,7 @@ import { heightScreen, widthScreen } from "../../constants/Sizes";
 import { Icon } from "@rneui/themed";
 import ImageDetailed from "../image/ImageDetailed";
 import Loader from "../loader/Loader";
+import { backgroundPrimary, textPrimary } from "../../constants/Colors";
 // import userIcon from '../../assets/userIcon.png';
 export interface ICard {
   id: number;
@@ -147,16 +148,16 @@ const styles = StyleSheet.create({
   container: {
      flex: 1,
      alignItems: "center",
-    backgroundColor: "#11151E",
+    backgroundColor: backgroundPrimary,
     width: width,
   },
   scroll_wrapper: {
     flex: 1,
-    backgroundColor: "#11151E",
+    backgroundColor: backgroundPrimary,
     width: width,
   },
   user_wrapper: {
-    backgroundColor: "#11151E",
+    backgroundColor: backgroundPrimary,
     flexDirection: "row",
     width: width,
     justifyContent: "space-between",
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
   count_of_recipes: {
     fontSize: 25,
     fontWeight: "600",
-    color: "#cfe38a",
+    color: textPrimary,
      alignSelf: "flex-start",
      padding: 15,
   },
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   user_photo: {
-    backgroundColor: "#cfe38a",
+    backgroundColor: textPrimary,
     width: 60,
     height: 60,
     borderRadius: 30,
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   hello_user: {
-    color: "#cfe38a",
+    color: textPrimary,
     fontSize: 20,
     fontWeight: "600",
     justifyContent: "space-between",

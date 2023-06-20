@@ -9,6 +9,7 @@ import { recipesApi } from "../../api-requests/recipes-api";
 import BottomModal from "../bottom-sheet-modal/BottomSheetModal";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { backgroundPrimary, borderColor, textPrimary } from "../../constants/Colors";
 
 export interface IDetailedCardData {
   additionalInfo: string[];
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#11151E",
+    backgroundColor: backgroundPrimary,
     paddingTop: 100,
   },
   info__wrapper: {
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     width: width,
   },
   additional_item: {
-    color: "#cfe38a",
+    color: textPrimary,
     padding: 10,
   },
   context__wrapper: {
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     width: width - 100,
     maxWidth: 450,
     borderWidth: 1,
-    borderColor: "#cfe38a",
+    borderColor: borderColor,
     borderRadius: 25,
     paddingHorizontal: 15,
     paddingVertical: 10,
@@ -139,8 +140,8 @@ const styles = StyleSheet.create({
   // constituents__item: {
   //   fontSize: 11,
   //   borderWidth: 1,
-  //   borderColor: "#cfe38a",
-  //   color: "#cfe38a",
+  //   borderColor: borderColor,
+  //   color: textPrimary,
   //   borderRadius: 15,
   //   paddingHorizontal: 5,
   //   paddingVertical: 10,
@@ -151,22 +152,22 @@ const styles = StyleSheet.create({
   // },
   extra_info__item: {
     fontSize: 15,
-    color: "#cfe38a",
+    color: textPrimary,
     width: width / 9,
     textAlign: "center",
   },
   detailed_description__wrapper: {
     backgroundColor: "transition",
     borderWidth: 1,
-    borderColor: "#cfe38a",
-    color: "#cfe38a",
+    borderColor: borderColor,
+    color: textPrimary,
     borderRadius: 10,
     width: width - 40,
     textAlign: "left",
     padding: 20,
   },
   detail_description__item: {
-    color: "#cfe38a",
+    color:textPrimary,
     paddingVertical: 10,
   },
 });

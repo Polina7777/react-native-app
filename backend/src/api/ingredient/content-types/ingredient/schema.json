@@ -14,6 +14,9 @@
   "attributes": {
     "ingredient": {
       "type": "string"
+    },
+    "image_url": {
+      "type": "string"
     }
   }
 }

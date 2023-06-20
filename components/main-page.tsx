@@ -8,6 +8,7 @@ import { recipesApi } from "../api-requests/recipes-api";
 import "react-native-gesture-handler";
 import { Text } from "./Themed";
 import Loader from "./loader/Loader";
+import { backgroundPrimary, textPrimary } from "../constants/Colors";
 
 export default function MainPage() {
   const Stack = createNativeStackNavigator();
@@ -22,8 +23,8 @@ export default function MainPage() {
             // headerTransparent: true,
             gestureEnabled:true,
             headerTransparent: false,
-            headerTintColor: "#cfe38a",
-            headerStyle: { backgroundColor: "#11151E" },
+            headerTintColor: textPrimary,
+            headerStyle: { backgroundColor: backgroundPrimary },
           }}
         >
           <Stack.Screen name="General" 

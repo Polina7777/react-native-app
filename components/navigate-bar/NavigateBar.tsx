@@ -6,6 +6,7 @@ import {
 } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { widthScreen } from "../../constants/Sizes";
+import { backgroundPrimary, borderColor, textPrimary } from "../../constants/Colors";
 
 export interface NavigateBarProps {
   tags: any;
@@ -45,8 +46,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     minWidth: 120,
     borderWidth: 1,
-    borderColor: "#cfe38a",
-    color: "#cfe38a",
+    borderColor: borderColor,
+    color: textPrimary,
     borderRadius: 10,
     paddingVertical: 3,
     textAlign: "center",
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
 
   navigate__wrapper: {},
   scroll_view: {
-    backgroundColor: "#11151E",
+    backgroundColor: backgroundPrimary,
     width: width,
   },
 });

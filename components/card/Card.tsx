@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import ImageComponent from "../image/Image";
 import { widthScreen, heightScreen } from "../../constants/Sizes";
+import { backgroundSecondary, textPrimary } from "../../constants/Colors";
 
 export interface CardProps {
   title: string;
@@ -48,8 +49,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     minHeight: 230,
-    color: "#cfe38a",
-    backgroundColor: "#302137",
+    color: textPrimary,
+    backgroundColor: backgroundSecondary,
     borderRadius: 10,
     textAlign: "center",
     width: width - 20,
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 19,
     fontWeight: "bold",
-    color: "#cfe38a",
+    color: textPrimary,
     paddingVertical: 5,
   },
   card_info__wrapper: {
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   },
   text_wrapper:{
    width:(width)/2,
-   backgroundColor:'#302137',
+   backgroundColor:backgroundSecondary,
    paddingLeft:20
   },
   options__wrapper: {
@@ -76,12 +77,12 @@ const styles = StyleSheet.create({
     flexDirection:'row',
   },
   option: {
-    color: "#cfe38a",
+    color: textPrimary,
     fontSize: 10,
     paddingRight:10,
     paddingVertical:10
   },
   description: {
-    color: "#cfe38a",
+    color: textPrimary,
   },
 });

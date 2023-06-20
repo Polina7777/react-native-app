@@ -1,9 +1,10 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import { backgroundPrimary, textPrimary } from '../../constants/Colors';
 
 const Loader = () => (
   <View style={[styles.container, styles.horizontal]}>
-    <ActivityIndicator size="large" color="#cfe38a" />
+    <ActivityIndicator size="large" color={textPrimary} />
   </View>
 );
 
@@ -11,7 +12,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: "#11151E",
+    backgroundColor: backgroundPrimary,
   },
   horizontal: {
     flexDirection: 'row',
