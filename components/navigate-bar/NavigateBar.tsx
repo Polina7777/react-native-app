@@ -1,5 +1,4 @@
 import {
-  ImageComponent,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -12,9 +11,7 @@ import {
   borderColor,
   textPrimary,
 } from "../../constants/Colors";
-import ImageIngredient from "../image/ImageIngredient";
-import { Image } from "expo-image";
-
+import  ImageTag from "../image/ImageTag";
 export interface NavigateBarProps {
   tags: any;
   handleTagClick: any;
@@ -39,7 +36,7 @@ export default function NavigateBar({
         transition={1000}
         ></Image> */}
                 <View style={styles.tag_wrappper}>
-                  <ImageIngredient urlImage={item.attributes.image_url} size={20} />
+                  <ImageTag urlImage={item.attributes.image_url} size={20} />
                   <Text style={styles.navigate_tag}>
                     {item.attributes.name}
                   </Text>

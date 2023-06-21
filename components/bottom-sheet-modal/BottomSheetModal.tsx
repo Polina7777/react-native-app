@@ -16,6 +16,7 @@ import { backgroundSecondary, borderColor, textPrimary } from "../../constants/C
 import ImageComponent from "../image/Image";
 import ImageIngredient from "../image/ImageIngredient";
 
+
 function BottomModal({ data, ingredients}) {
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -60,6 +61,7 @@ function BottomModal({ data, ingredients}) {
                   //   {item.attributes.image_url}
                   // </Text>
                    <View key={item.id}    style={styles.constituents__item}>
+                  {/* <ImageIngredient  urlImage={item.attributes.image_url}></ ImageIngredient> */}
                   <ImageIngredient  urlImage={item.attributes.image_url}></ ImageIngredient>
                    </View>
                 );
@@ -67,7 +69,7 @@ function BottomModal({ data, ingredients}) {
             </View>
             <ScrollView>
               <TouchableOpacity>
-              <ImageIngredient   urlImage={'https://www.svgrepo.com/show/356667/zucchini.svg'}></ ImageIngredient>
+              {/* <ImageIngredient   urlImage={'https://www.svgrepo.com/show/356667/zucchini.svg'}></ ImageIngredient> */}
                 <Text style={styles.text}>{data}</Text>
                
               </TouchableOpacity>
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: backgroundSecondary,
     borderRadius: 20,
     // borderTopLeftRadius: 20,
-    minHeight: 300,
+    minHeight: 350,
     maxHeight: height,
     paddingVertical: 10,
     width: width - 30,
@@ -117,8 +119,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     backgroundColor:'blue',
-    height:150,
-    width:width
+    // height:150,
+    // width:width
   },
   barIcon: {
     width: 40,
@@ -142,6 +144,7 @@ const styles = StyleSheet.create({
   },
   constituents__item: {
     // fontSize: 11,
+    justifyContent:'center',
     borderWidth: 1,
    borderColor: borderColor,
     // color: textPrimary,
@@ -150,8 +153,10 @@ const styles = StyleSheet.create({
     // paddingVertical: 10,
     // textAlign: "center",
     // alignSelf: "center",
-    width: 80,
-    margin: 5,
-     height:80
+    width: 60,
+    margin: 10,
+     height:60,
+    borderRadius:30,
+    padding:7
   },
 });
