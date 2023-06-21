@@ -11,6 +11,7 @@ import Modal from "react-native-modal";
 import { widthScreen, heightScreen } from "../../constants/Sizes";
 import { backgroundSecondary, borderColor } from "../../constants/Colors";
 import { Image } from "expo-image";
+import { IIngredient } from "../../interfaces";
 
 function BottomModal({ data, ingredients }: any) {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -46,7 +47,7 @@ function BottomModal({ data, ingredients }: any) {
             <TouchableOpacity>
               <ScrollView>
                 <View style={styles.constituents_wrapper}>
-                  {ingredients.map((item, index: number) => {
+                  {ingredients.map((item: IIngredient) => {
                     return (
                       <View key={item.id} style={styles.constituents__item}>
                         <Image

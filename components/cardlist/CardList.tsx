@@ -26,7 +26,7 @@ export default function CardList({ navigation }:CardListProps) {
   const [currentTag, setCurrentTag] = useState<ITag>();
   const [loading, setLoading] = useState(true);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
-  const [filters, setFilters] = useState([]);
+ const [filters, setFilters] = useState([]);
   // const [filters, setFilters] = useState({  kcal: "",
   //   serve:"",
   //   grams: ""});
@@ -81,6 +81,9 @@ export default function CardList({ navigation }:CardListProps) {
     try {
       setLoading(true);
       const filteredCardList = await filtersApi.filtersByFiltersForm(filters);
+      // setFilters({  kcal: "",
+      // serve:"",
+      // grams: ""})
       setFilters([])
       if (filteredCardList.length) {
         setCardList(filteredCardList);
@@ -102,7 +105,6 @@ export default function CardList({ navigation }:CardListProps) {
     }
   }, [filters]);
 
-  console.log(filters, "filters");
   return (
     <View style={styles.card_list_wrapper}>
       <View style={styles.user_wrapper}>

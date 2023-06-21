@@ -13,7 +13,7 @@ import {
 } from "../../constants/Colors";
 
 import { Image } from "expo-image";
-import { NavigateBarProps } from "../../interfaces";
+import { ITag, NavigateBarProps } from "../../interfaces";
 
 
 export default function NavigateBar({
@@ -23,7 +23,7 @@ export default function NavigateBar({
   return tags ? (
     <View style={styles.navigate__wrapper}>
       <ScrollView horizontal={true} style={styles.scroll_view}>
-        {tags.map((item, index: number) => {
+        {tags.map((item:ITag) => {
           return (
             <TouchableOpacity key={item.id} style={styles.container}>
               <Pressable onPress={() => handleTagClick(item)}>

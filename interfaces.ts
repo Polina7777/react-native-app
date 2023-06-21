@@ -53,3 +53,11 @@ export interface ICard {
     tags: any;
     handleTagClick: any;
   }
+  export interface IAttributesIngredient {
+    name: string;
+    image_url: any;
+  }
+  export interface IIngredient{
+    id:string;
+    attributes:IAttributesIngredient;
+  }
