@@ -42,7 +42,6 @@ export default function Card({
   );
 }
 const { width } = widthScreen;
-const { height } = heightScreen;
 
 const styles = StyleSheet.create({
   card__wrapper: {

@@ -9,16 +9,16 @@ import {
 } from "../../constants/Colors";
 import { TextInput } from "react-native-gesture-handler";
 import { Formik } from "formik";
+import { IValue } from "../../interfaces";
 
 const FilterModal = ({
   setFilters,
   setFilterModalVisible,
   filterModalVisible,
-}) => {
-  const submitPress = (values) => {
+}: any) => {
+  const submitPress = (values: IValue) => {
     setFilters(values);
     setFilterModalVisible(false);
-    // filterRequest()
   };
   return (
     <View style={styles.container}>
@@ -57,33 +57,7 @@ const FilterModal = ({
                       value={values.serve}
                     />
                   </View>
-                  {/* <View>
-                    <Text style={styles.input_title}>Time:</Text>
-                    <Text style={styles.input_time}>from:</Text>
-                    <TextInput
-                      style={styles.input}
-                      onChangeText={handleChange("timeFrom")}
-                      onBlur={handleBlur("timeFrom")}
-                      value={values.timeFrom}
-                    />
-                    <Text style={styles.input_time}>to:</Text>
-                    <TextInput
-                      style={styles.input}
-                      onChangeText={handleChange("timeTo")}
-                      onBlur={handleBlur("timeTo")}
-                      value={values.timeTo}
-                    />
-                  </View> */}
-                  {/* <View>
-                    <Text style={styles.input_title}>Ingredient:</Text>
-                    <TextInput
-                      style={styles.input}
-                      onChangeText={handleChange("ingredient")}
-                      onBlur={handleBlur("ingredient")}
-                      value={values.ingredient}
-                    />
-                  </View> */}
-                     <View>
+                  <View>
                     <Text style={styles.input_title}>Grams:</Text>
                     <TextInput
                       style={styles.input}

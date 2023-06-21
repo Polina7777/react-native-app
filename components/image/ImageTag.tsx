@@ -8,11 +8,8 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
      borderRadius: 10,
-    //  alignItems:'center',
      alignSelf:'center',
      justifyContent:'center',
-    // zIndex:300
-    // color:'white'
   },
 
 });

@@ -13,10 +13,8 @@ import {
 } from "../../constants/Colors";
 
 import { Image } from "expo-image";
-export interface NavigateBarProps {
-  tags: any;
-  handleTagClick: any;
-}
+import { NavigateBarProps } from "../../interfaces";
+
 
 export default function NavigateBar({
   tags,

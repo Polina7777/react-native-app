@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
-  ImageBackground,
   Pressable,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  // Image
 } from "react-native";
 import Modal from "react-native-modal";
 import { widthScreen, heightScreen } from "../../constants/Sizes";
-import {
-  backgroundSecondary,
-  borderColor,
-
-} from "../../constants/Colors";
-
+import { backgroundSecondary, borderColor } from "../../constants/Colors";
 import { Image } from "expo-image";
 
-function BottomModal({ data, ingredients }) {
+function BottomModal({ data, ingredients }: any) {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
@@ -33,9 +24,7 @@ function BottomModal({ data, ingredients }) {
 
   return (
     <View style={styles.flexView}>
-      {/* <StatusBar /> */}
-      <Pressable onPress={toggleModal}>
-      </Pressable>
+      <Pressable onPress={toggleModal}></Pressable>
       <Modal
         onBackdropPress={() => setModalVisible(false)}
         //  onBackButtonPress={() => setModalVisible(false)}
@@ -57,11 +46,8 @@ function BottomModal({ data, ingredients }) {
             <TouchableOpacity>
               <ScrollView>
                 <View style={styles.constituents_wrapper}>
-                  {ingredients.map((item, index) => {
+                  {ingredients.map((item, index: number) => {
                     return (
-                      // <Text style={styles.constituents__item} key={index}>
-                      //   {item.attributes.ingredient}
-                      // </Text>
                       <View key={item.id} style={styles.constituents__item}>
                         <Image
                           style={{
@@ -103,7 +89,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     width: width - 20,
     alignItems: "center",
-
   },
   modalContent: {
     backgroundColor: backgroundSecondary,
@@ -115,26 +100,22 @@ const styles = StyleSheet.create({
     width: width - 30,
     alignSelf: "center",
 
-    maxHeight: height/1.8 ,
- 
+    maxHeight: height / 1.8,
   },
   center: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
-
   },
   constituents_wrapper: {
     paddingTop: 10,
     flexWrap: "wrap",
     flexDirection: "row",
-   justifyContent: "center",
+    justifyContent: "center",
     backgroundColor: backgroundSecondary,
 
-alignSelf:'center'
-
-
+    alignSelf: "center",
   },
   barIcon: {
     width: 40,

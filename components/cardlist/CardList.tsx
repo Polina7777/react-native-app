@@ -1,6 +1,4 @@
 import {
-  Dimensions,
-  ImageComponent,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -8,46 +6,30 @@ import {
 } from "react-native";
 import { View, Text } from "../../components/Themed";
 import Card from "../../components/card/Card";
-import React, { useCallback, useEffect, useState } from "react";
-import DetailedCard from "../detailed-card/DetailedCard";
+import React, { useEffect, useState } from "react";
 import NavigateBar from "../navigate-bar/NavigateBar";
 import { recipesApi } from "../../api-requests/recipes-api";
 import { categoryApi } from "../../api-requests/category-api";
 import { filtersApi } from "../../api-requests/filters-api";
 import { Image } from "expo-image";
-
 import { heightScreen, widthScreen } from "../../constants/Sizes";
-
 import Loader from "../loader/Loader";
 import { backgroundPrimary, textPrimary } from "../../constants/Colors";
-
 import FilterModal from "../filter_form/FilterModal";
-import ImageIngredient from "../image/ImageIngredient";
+import { CardListProps, ICard, ITag } from "../../interfaces";
 
-export interface ICard {
-  id: number;
-  attributes: IAttributes;
-}
-export interface IAttributes {
-  title: string;
-  description: string;
-  small_extra_info: any;
-  image_url: any;
-  id: number | string;
-}
-export interface CardListProps {
-  cardList: any;
-  handleCardPress: any;
-  navigation?: any;
-}
 
-export default function CardList({ handleClick, navigation }: any) {
+
+export default function CardList({ navigation }:CardListProps) {
   const [tags, setTags] = useState();
   const [cardList, setCardList] = useState([]);
-  const [currentTag, setCurrentTag] = useState();
+  const [currentTag, setCurrentTag] = useState<ITag>();
   const [loading, setLoading] = useState(true);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
-  const [filters,setFilters]= useState([]) 
+  const [filters, setFilters] = useState([]);
+  // const [filters, setFilters] = useState({  kcal: "",
+  //   serve:"",
+  //   grams: ""});
 
   const getCardsInfo = async () => {
     try {
@@ -80,7 +62,7 @@ export default function CardList({ handleClick, navigation }: any) {
     }
   };
 
-  const handleTagClick = (item) => {
+  const handleTagClick = (item:ITag) => {
     setCurrentTag(item);
   };
 
@@ -98,10 +80,13 @@ export default function CardList({ handleClick, navigation }: any) {
   const getFilteredCardListByFiltersModal = async () => {
     try {
       setLoading(true);
-      const filteredCardList = await filtersApi.filtersByFiltersForm(filters)
-      console.log(filteredCardList,'filteredCardList')
-      // setTags(tagsList);
-      // setCardList(filteredCardList)
+      const filteredCardList = await filtersApi.filtersByFiltersForm(filters);
+      setFilters([])
+      if (filteredCardList.length) {
+        setCardList(filteredCardList);
+      } else {
+        setLoading(true);
+      }
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -111,18 +96,14 @@ export default function CardList({ handleClick, navigation }: any) {
   const toggleModal = () => {
     setFilterModalVisible(!filterModalVisible);
   };
-  useEffect(()=>{
-    if(filters){
-      getFilteredCardListByFiltersModal()
+  useEffect(() => {
+    if (Object.keys(filters).length) {
+      getFilteredCardListByFiltersModal();
     }
-  },[filters])
-  // const openModal = () =>{
-  //   setFilterModalVisible(true)
-  // }
-  console.log(filters,'filters')
-  console.log(cardList,'cardList')
+  }, [filters]);
+
+  console.log(filters, "filters");
   return (
-    //  <View style={styles.page_wrapper}>
     <View style={styles.card_list_wrapper}>
       <View style={styles.user_wrapper}>
         <Text style={styles.hello_user}>Hello,User!</Text>
@@ -132,25 +113,28 @@ export default function CardList({ handleClick, navigation }: any) {
       <NavigateBar tags={tags} handleTagClick={handleTagClick} />
       {cardList.length && !loading ? (
         <View style={styles.container}>
-          <Text style={styles.count_of_recipes}>
-            {`${cardList.length} ${
-              currentTag ? currentTag?.attributes.name : "All"
-            }`}
-          </Text>
-          <Pressable onPress={toggleModal}>
-            <Image
-              style={{
-                width: 30,
-                height: 30,
-                justifyContent: "center",
-              }}
-              source={'https://www.svgrepo.com/show/425202/filter-market-ecommerce.svg'}
-              // placeholder={blurhash}
-              // contentFit="cover"
-              // transition={1000}
-            />
-            {/* <ImageIngredient urlImage={'https://www.svgrepo.com/show/425202/filter-market-ecommerce.svg'}/> */}
-          </Pressable>
+          <View style={styles.filters_wrapper}>
+            <Text style={styles.count_of_recipes}>
+              {`${cardList.length} ${
+                currentTag ? currentTag?.attributes.name : "All"
+              }`}
+            </Text>
+            <Pressable onPress={toggleModal}>
+              <Image
+                style={{
+                  width: 30,
+                  height: 30,
+                  justifyContent: "center",
+                }}
+                source={
+                  "https://www.svgrepo.com/show/425202/filter-market-ecommerce.svg"
+                }
+                // placeholder={blurhash}
+                // contentFit="cover"
+                // transition={1000}
+              />
+            </Pressable>
+          </View>
           <ScrollView style={styles.scroll_wrapper}>
             {cardList.map((item: ICard, index) => {
               return (
@@ -176,15 +160,19 @@ export default function CardList({ handleClick, navigation }: any) {
               );
             })}
           </ScrollView>
-         {/* {filterModalVisible ? <FilterModal setFilters={setFilters} filterModalVisible={filterModalVisible}  setFilterModalVisible={ setFilterModalVisible} /> : null}  */}
         </View>
       ) : (
         <Loader />
       )}
-    {filterModalVisible ? <FilterModal setFilters={setFilters} filterModalVisible={filterModalVisible}  setFilterModalVisible={ setFilterModalVisible} /> : null}
+      {filterModalVisible ? (
+        <FilterModal
+          setFilters={setFilters}
+          filterModalVisible={filterModalVisible}
+          setFilterModalVisible={setFilterModalVisible}
+        />
+      ) : null}
     </View>
-   
-    // </View>
+
   );
 }
 const { width } = widthScreen;
@@ -196,8 +184,15 @@ const styles = StyleSheet.create({
     backgroundColor: backgroundPrimary,
     width: width,
   },
-  page_wrapper:{
-    alignItems:'center'
+  page_wrapper: {
+    alignItems: "center",
+  },
+  filters_wrapper: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    width: width - 40,
+    backgroundColor: backgroundPrimary,
   },
   scroll_wrapper: {
     flex: 1,

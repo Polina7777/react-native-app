@@ -1,31 +1,24 @@
-import { Button, ScrollView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { ImageComponentDetailedCard } from "../image/ImageDetailed";
 import Loader from "../loader/Loader";
 import { ingredientsApi } from "../../api-requests/ingredients-api";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { widthScreen } from "../../constants/Sizes";
 import { recipesApi } from "../../api-requests/recipes-api";
 import BottomModal from "../bottom-sheet-modal/BottomSheetModal";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { backgroundPrimary, borderColor, textPrimary } from "../../constants/Colors";
+import {
+  backgroundPrimary,
+  borderColor,
+  textPrimary,
+} from "../../constants/Colors";
+import { IRecipe } from "../../interfaces";
 
-export interface IDetailedCardData {
-  additionalInfo: string[];
-  process: string;
-  image_url: string;
-  constituents: string[];
-}
-export interface DetailedCardProps {
-  data: IDetailedCardData;
-  navigation: any;
-}
 
 export default function DetailedCard({ navigation, route }: any) {
   const [ingredients, setIngredients] = useState([]);
   const [extraInfo, setExtraInfo] = useState<string[]>([]);
-  const [recipe, setRecipe] = useState();
+  const [recipe, setRecipe] = useState<IRecipe>();
 
   const getDetailedCardInfo = async () => {
     try {
@@ -80,7 +73,6 @@ export default function DetailedCard({ navigation, route }: any) {
           ingredients={ingredients}
         />
       </View>
-
     </View>
   ) : (
     <Loader />
@@ -147,7 +139,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   detail_description__item: {
-    color:textPrimary,
+    color: textPrimary,
     paddingVertical: 10,
   },
 });
