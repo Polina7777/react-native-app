@@ -15,7 +15,6 @@ const FilterModal = ({
   setFilterModalVisible,
   filterModalVisible,
 }) => {
-
   const submitPress = (values) => {
     setFilters(values);
     setFilterModalVisible(false);
@@ -30,7 +29,13 @@ const FilterModal = ({
         <View style={styles.form_wrapper}>
           <View style={styles.form_container}>
             <Formik
-              initialValues={{ kcal: "", serve: "", time: "", ingredient: "" }}
+              initialValues={{
+                kcal: "",
+                serve: "",
+                timeFrom: "",
+                timeTo: "",
+                ingredient: "",
+              }}
               onSubmit={(values) => submitPress(values)}
             >
               {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -55,11 +60,19 @@ const FilterModal = ({
                   </View>
                   <View>
                     <Text style={styles.input_title}>Time:</Text>
+                    <Text style={styles.input_time}>from:</Text>
                     <TextInput
                       style={styles.input}
-                      onChangeText={handleChange("time")}
-                      onBlur={handleBlur("time")}
-                      value={values.time}
+                      onChangeText={handleChange("timeFrom")}
+                      onBlur={handleBlur("timeFrom")}
+                      value={values.timeFrom}
+                    />
+                    <Text style={styles.input_time}>to:</Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={handleChange("timeTo")}
+                      onBlur={handleBlur("timeTo")}
+                      value={values.timeTo}
                     />
                   </View>
                   <View>
@@ -94,12 +107,12 @@ const styles = StyleSheet.create({
     width: width - 30,
   },
   modal: {
-    paddingTop: height / 7,
+    paddingTop: height / 9,
     justifyContent: "flex-start",
   },
   form_wrapper: {
     alignItems: "center",
-    height: height / 2.8,
+    height: height / 2.17,
   },
   form_container: {
     flex: 1,
@@ -115,6 +128,11 @@ const styles = StyleSheet.create({
     color: textPrimary,
     paddingVertical: 7,
     fontSize: 15,
+  },
+  input_time:{
+    fontSize:12,
+    color: textPrimary,
+    paddingVertical: 7,
   },
   input: {
     width: width - 100,

@@ -101,6 +101,7 @@ export default function CardList({ handleClick, navigation }: any) {
   //   setFilterModalVisible(true)
   // }
   console.log(filters,'filters')
+  console.log(cardList,'cardList')
   return (
     //  <View style={styles.page_wrapper}>
     <View style={styles.card_list_wrapper}>
