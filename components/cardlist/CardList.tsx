@@ -14,6 +14,7 @@ import NavigateBar from "../navigate-bar/NavigateBar";
 import { recipesApi } from "../../api-requests/recipes-api";
 import { categoryApi } from "../../api-requests/category-api";
 import { filtersApi } from "../../api-requests/filters-api";
+import { Image } from "expo-image";
 
 import { heightScreen, widthScreen } from "../../constants/Sizes";
 
@@ -46,6 +47,7 @@ export default function CardList({ handleClick, navigation }: any) {
   const [currentTag, setCurrentTag] = useState();
   const [loading, setLoading] = useState(true);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
+  const [filters,setFilters]= useState([]) 
 
   const getCardsInfo = async () => {
     try {
@@ -95,8 +97,12 @@ export default function CardList({ handleClick, navigation }: any) {
   const toggleModal = () => {
     setFilterModalVisible(!filterModalVisible);
   };
+  // const openModal = () =>{
+  //   setFilterModalVisible(true)
+  // }
+  console.log(filters,'filters')
   return (
-    <View style={styles.page_wrapper}>
+    //  <View style={styles.page_wrapper}>
     <View style={styles.card_list_wrapper}>
       <View style={styles.user_wrapper}>
         <Text style={styles.hello_user}>Hello,User!</Text>
@@ -112,18 +118,18 @@ export default function CardList({ handleClick, navigation }: any) {
             }`}
           </Text>
           <Pressable onPress={toggleModal}>
-            {/* <Image
+            <Image
               style={{
                 width: 30,
                 height: 30,
                 justifyContent: "center",
               }}
-              source={"../../assets/filter.svg"}
+              source={'https://www.svgrepo.com/show/425202/filter-market-ecommerce.svg'}
               // placeholder={blurhash}
               // contentFit="cover"
               // transition={1000}
-            /> */}
-            <ImageIngredient urlImage={'https://www.svgrepo.com/show/425202/filter-market-ecommerce.svg'}/>
+            />
+            {/* <ImageIngredient urlImage={'https://www.svgrepo.com/show/425202/filter-market-ecommerce.svg'}/> */}
           </Pressable>
           <ScrollView style={styles.scroll_wrapper}>
             {cardList.map((item: ICard, index) => {
@@ -150,14 +156,15 @@ export default function CardList({ handleClick, navigation }: any) {
               );
             })}
           </ScrollView>
+         {/* {filterModalVisible ? <FilterModal setFilters={setFilters} filterModalVisible={filterModalVisible}  setFilterModalVisible={ setFilterModalVisible} /> : null}  */}
         </View>
       ) : (
         <Loader />
       )}
+    {filterModalVisible ? <FilterModal setFilters={setFilters} filterModalVisible={filterModalVisible}  setFilterModalVisible={ setFilterModalVisible} /> : null}
+    </View>
    
-    </View>
-    {filterModalVisible ? <FilterModal/> : null}
-    </View>
+    // </View>
   );
 }
 const { width } = widthScreen;

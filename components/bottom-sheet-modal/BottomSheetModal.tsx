@@ -16,10 +16,9 @@ import { widthScreen, heightScreen } from "../../constants/Sizes";
 import {
   backgroundSecondary,
   borderColor,
-  textPrimary,
+
 } from "../../constants/Colors";
-import ImageComponent from "../image/Image";
-import ImageIngredient from "../image/ImageIngredient";
+
 import { Image } from "expo-image";
 
 function BottomModal({ data, ingredients }) {
@@ -36,9 +35,6 @@ function BottomModal({ data, ingredients }) {
     <View style={styles.flexView}>
       {/* <StatusBar /> */}
       <Pressable onPress={toggleModal}>
-        <View style={styles.btnContainer}>
-          {/* <Button title="Show Bottom Sheet" onPress={toggleModal} /> */}
-        </View>
       </Pressable>
       <Modal
         onBackdropPress={() => setModalVisible(false)}
@@ -107,29 +103,27 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     width: width - 20,
     alignItems: "center",
-    // height: height ,
-    // position:'relative'
+
   },
   modalContent: {
     backgroundColor: backgroundSecondary,
     borderRadius: 20,
-    // borderTopLeftRadius: 20,
+
     minHeight: 300,
-    // maxHeight: height,
+
     paddingVertical: 10,
     width: width - 30,
     alignSelf: "center",
-    // justifyContent: "flex-end",
-    // justifyContent: "center",
+
     maxHeight: height/1.8 ,
-    // position:'relative'
+ 
   },
   center: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
-    // position:'relative'
+
   },
   constituents_wrapper: {
     paddingTop: 10,
@@ -137,9 +131,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
    justifyContent: "center",
     backgroundColor: backgroundSecondary,
-    // width:width,
+
 alignSelf:'center'
-    // position:'absolute',
+
 
   },
   barIcon: {
@@ -159,19 +153,11 @@ alignSelf:'center'
     alignItems: "flex-end",
     justifyContent: "center",
     height: height,
-    // backgroundColor: "blue",
     width: width,
   },
   constituents__item: {
-    // fontSize: 11,
-    // justifyContent: "center",
     borderWidth: 1,
     borderColor: borderColor,
-    // color: textPrimary,
-    // borderRadius: 15,
-    // paddingHorizontal: 5,
-    // paddingVertical: 10,
-    // textAlign: "center",
     alignItems: "center",
     width: 50,
     margin: 5,
