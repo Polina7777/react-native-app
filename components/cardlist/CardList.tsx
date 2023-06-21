@@ -94,9 +94,28 @@ export default function CardList({ handleClick, navigation }: any) {
       console.log(err);
     }
   };
+
+  const getFilteredCardListByFiltersModal = async () => {
+    try {
+      setLoading(true);
+      const filteredCardList = await filtersApi.filtersByFiltersForm(filters)
+      console.log(filteredCardList,'filteredCardList')
+      // setTags(tagsList);
+      // setCardList(filteredCardList)
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const toggleModal = () => {
     setFilterModalVisible(!filterModalVisible);
   };
+  useEffect(()=>{
+    if(filters){
+      getFilteredCardListByFiltersModal()
+    }
+  },[filters])
   // const openModal = () =>{
   //   setFilterModalVisible(true)
   // }

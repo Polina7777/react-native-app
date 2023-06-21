@@ -18,6 +18,7 @@ const FilterModal = ({
   const submitPress = (values) => {
     setFilters(values);
     setFilterModalVisible(false);
+    // filterRequest()
   };
   return (
     <View style={styles.container}>
@@ -32,9 +33,7 @@ const FilterModal = ({
               initialValues={{
                 kcal: "",
                 serve: "",
-                timeFrom: "",
-                timeTo: "",
-                ingredient: "",
+                grams: "",
               }}
               onSubmit={(values) => submitPress(values)}
             >
@@ -58,7 +57,7 @@ const FilterModal = ({
                       value={values.serve}
                     />
                   </View>
-                  <View>
+                  {/* <View>
                     <Text style={styles.input_title}>Time:</Text>
                     <Text style={styles.input_time}>from:</Text>
                     <TextInput
@@ -74,14 +73,23 @@ const FilterModal = ({
                       onBlur={handleBlur("timeTo")}
                       value={values.timeTo}
                     />
-                  </View>
-                  <View>
+                  </View> */}
+                  {/* <View>
                     <Text style={styles.input_title}>Ingredient:</Text>
                     <TextInput
                       style={styles.input}
                       onChangeText={handleChange("ingredient")}
                       onBlur={handleBlur("ingredient")}
                       value={values.ingredient}
+                    />
+                  </View> */}
+                     <View>
+                    <Text style={styles.input_title}>Grams:</Text>
+                    <TextInput
+                      style={styles.input}
+                      onChangeText={handleChange("grams")}
+                      onBlur={handleBlur("grams")}
+                      value={values.grams}
                     />
                   </View>
                   <Button
@@ -112,7 +120,7 @@ const styles = StyleSheet.create({
   },
   form_wrapper: {
     alignItems: "center",
-    height: height / 2.17,
+    height: height / 3.5,
   },
   form_container: {
     flex: 1,
@@ -129,8 +137,8 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     fontSize: 15,
   },
-  input_time:{
-    fontSize:12,
+  input_time: {
+    fontSize: 12,
     color: textPrimary,
     paddingVertical: 7,
   },
