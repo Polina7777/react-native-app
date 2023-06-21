@@ -28,7 +28,7 @@ export default function MainPage() {
           }}
         >
           <Stack.Screen name="General" 
-          options={{ title: "knknkk" ,
+          options={{
         headerShown:false}}
           >
             {(props) => <CardList {...props} />}

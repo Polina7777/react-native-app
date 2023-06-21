@@ -116,13 +116,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transition",
     justifyContent: "center",
   },
-  // constituents__wrapper: {
-  //   backgroundColor: "transition",
-  //   alignItems: "center",
-  //   flexDirection: "row",
-  //   width: width - 40,
-  //   justifyContent: "center",
-  // },
   extra_info__wrapper: {
     backgroundColor: "transition",
     alignItems: "center",
@@ -137,19 +130,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignSelf: "center",
   },
-  // constituents__item: {
-  //   fontSize: 11,
-  //   borderWidth: 1,
-  //   borderColor: borderColor,
-  //   color: textPrimary,
-  //   borderRadius: 15,
-  //   paddingHorizontal: 5,
-  //   paddingVertical: 10,
-  //   textAlign: "center",
-  //   alignSelf: "center",
-  //   width: 100,
-  //   marginHorizontal: 5,
-  // },
   extra_info__item: {
     fontSize: 15,
     color: textPrimary,

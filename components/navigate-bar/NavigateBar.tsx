@@ -11,7 +11,8 @@ import {
   borderColor,
   textPrimary,
 } from "../../constants/Colors";
-import  ImageTag from "../image/ImageTag";
+
+import { Image } from "expo-image";
 export interface NavigateBarProps {
   tags: any;
   handleTagClick: any;
@@ -28,15 +29,14 @@ export default function NavigateBar({
           return (
             <TouchableOpacity key={item.id} style={styles.container}>
               <Pressable onPress={() => handleTagClick(item)}>
-                {/* <Image  
-                style={styles.image}
-        source={item.attributes.image_url}
-        // placeholder={blurhash}
-        contentFit="cover"
-        transition={1000}
-        ></Image> */}
                 <View style={styles.tag_wrappper}>
-                  <ImageTag urlImage={item.attributes.image_url} size={20} />
+                  <Image
+                      style={{ width: 20, height: 20 ,justifyContent:'center',}}
+                      source={item.attributes.image_url}
+                      // placeholder={blurhash}
+                      // contentFit="cover"
+                      // transition={1000}
+                    />
                   <Text style={styles.navigate_tag}>
                     {item.attributes.name}
                   </Text>

@@ -14,17 +14,15 @@ import NavigateBar from "../navigate-bar/NavigateBar";
 import { recipesApi } from "../../api-requests/recipes-api";
 import { categoryApi } from "../../api-requests/category-api";
 import { filtersApi } from "../../api-requests/filters-api";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { JumpingTransition } from "react-native-reanimated";
-import { SplashScreen } from "expo-router";
+
 import { heightScreen, widthScreen } from "../../constants/Sizes";
-import { Icon } from "@rneui/themed";
-import ImageDetailed from "../image/ImageDetailed";
+
 import Loader from "../loader/Loader";
 import { backgroundPrimary, textPrimary } from "../../constants/Colors";
-// import userIcon from '../../assets/userIcon.png';
+
+import FilterModal from "../filter_form/FilterModal";
+import ImageIngredient from "../image/ImageIngredient";
+
 export interface ICard {
   id: number;
   attributes: IAttributes;
@@ -47,6 +45,7 @@ export default function CardList({ handleClick, navigation }: any) {
   const [cardList, setCardList] = useState([]);
   const [currentTag, setCurrentTag] = useState();
   const [loading, setLoading] = useState(true);
+  const [filterModalVisible, setFilterModalVisible] = useState(false);
 
   const getCardsInfo = async () => {
     try {
@@ -93,7 +92,11 @@ export default function CardList({ handleClick, navigation }: any) {
       console.log(err);
     }
   };
+  const toggleModal = () => {
+    setFilterModalVisible(!filterModalVisible);
+  };
   return (
+    <View style={styles.page_wrapper}>
     <View style={styles.card_list_wrapper}>
       <View style={styles.user_wrapper}>
         <Text style={styles.hello_user}>Hello,User!</Text>
@@ -108,37 +111,52 @@ export default function CardList({ handleClick, navigation }: any) {
               currentTag ? currentTag?.attributes.name : "All"
             }`}
           </Text>
-            <ScrollView style={styles.scroll_wrapper}>
-              {cardList.map((item: ICard, index) => {
-                return (
-                  <TouchableOpacity key={index} style={styles.container}>
-                    <Pressable
-                      onPress={() => {
-                        navigation.navigate("Card", {
-                          itemId: item.id,
-                          title: item.attributes.title,
-                        });
-                      }}
-                    >
-                      <Card
-                        title={item.attributes.title}
-                        description={item.attributes.description}
-                        options={
-                          item.attributes.small_extra_info.data.attributes
-                        }
-                        imageUrl={item.attributes.image_url}
-                        id={item.id}
-                        key={index}
-                      />
-                    </Pressable>
-                  </TouchableOpacity>
-                );
-              })}
-            </ScrollView>
+          <Pressable onPress={toggleModal}>
+            {/* <Image
+              style={{
+                width: 30,
+                height: 30,
+                justifyContent: "center",
+              }}
+              source={"../../assets/filter.svg"}
+              // placeholder={blurhash}
+              // contentFit="cover"
+              // transition={1000}
+            /> */}
+            <ImageIngredient urlImage={'https://www.svgrepo.com/show/425202/filter-market-ecommerce.svg'}/>
+          </Pressable>
+          <ScrollView style={styles.scroll_wrapper}>
+            {cardList.map((item: ICard, index) => {
+              return (
+                <TouchableOpacity key={index} style={styles.container}>
+                  <Pressable
+                    onPress={() => {
+                      navigation.navigate("Card", {
+                        itemId: item.id,
+                        title: item.attributes.title,
+                      });
+                    }}
+                  >
+                    <Card
+                      title={item.attributes.title}
+                      description={item.attributes.description}
+                      options={item.attributes.small_extra_info.data.attributes}
+                      imageUrl={item.attributes.image_url}
+                      id={item.id}
+                      key={index}
+                    />
+                  </Pressable>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
         </View>
       ) : (
         <Loader />
       )}
+   
+    </View>
+    {filterModalVisible ? <FilterModal/> : null}
     </View>
   );
 }
@@ -146,10 +164,13 @@ const { width } = widthScreen;
 const { height } = heightScreen;
 const styles = StyleSheet.create({
   container: {
-     flex: 1,
-     alignItems: "center",
+    flex: 1,
+    alignItems: "center",
     backgroundColor: backgroundPrimary,
     width: width,
+  },
+  page_wrapper:{
+    alignItems:'center'
   },
   scroll_wrapper: {
     flex: 1,
@@ -164,7 +185,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     height: 170,
     maxHeight: 180,
-    paddingTop:10
+    paddingTop: 20,
   },
   card_list_wrapper: {
     height: height,
@@ -173,8 +194,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "600",
     color: textPrimary,
-     alignSelf: "flex-start",
-     padding: 15,
+    alignSelf: "flex-start",
+    padding: 15,
   },
   title: {
     fontSize: 20,
@@ -194,6 +215,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     justifyContent: "space-between",
     alignSelf: "center",
-    width: width/2,
+    width: width / 2,
   },
 });
