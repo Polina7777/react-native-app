@@ -1,4 +1,5 @@
 import {
+  ImageComponent,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -6,7 +7,13 @@ import {
 } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { widthScreen } from "../../constants/Sizes";
-import { backgroundPrimary, borderColor, textPrimary } from "../../constants/Colors";
+import {
+  backgroundPrimary,
+  borderColor,
+  textPrimary,
+} from "../../constants/Colors";
+import ImageIngredient from "../image/ImageIngredient";
+import { Image } from "expo-image";
 
 export interface NavigateBarProps {
   tags: any;
@@ -24,7 +31,19 @@ export default function NavigateBar({
           return (
             <TouchableOpacity key={item.id} style={styles.container}>
               <Pressable onPress={() => handleTagClick(item)}>
-                <Text style={styles.navigate_tag}>{item.attributes.name}</Text>
+                {/* <Image  
+                style={styles.image}
+        source={item.attributes.image_url}
+        // placeholder={blurhash}
+        contentFit="cover"
+        transition={1000}
+        ></Image> */}
+                <View style={styles.tag_wrappper}>
+                  <ImageIngredient urlImage={item.attributes.image_url} size={20} />
+                  <Text style={styles.navigate_tag}>
+                    {item.attributes.name}
+                  </Text>
+                </View>
               </Pressable>
             </TouchableOpacity>
           );
@@ -44,14 +63,23 @@ const styles = StyleSheet.create({
   navigate_tag: {
     fontSize: 17,
     fontWeight: "bold",
+    color: textPrimary,
+    paddingLeft:7,
+  },
+  tag_wrappper:{
+    flexDirection:'row',
+alignItem:'center',
+    textAlignVertical:'center',
+    justifyContent:'center',
     minWidth: 120,
     borderWidth: 1,
     borderColor: borderColor,
-    color: textPrimary,
     borderRadius: 10,
-    paddingVertical: 3,
+    paddingVertical: 5,
+    paddingHorizontal:7,
     textAlign: "center",
     marginHorizontal: 7,
+    backgroundColor: backgroundPrimary
   },
 
   navigate__wrapper: {},
