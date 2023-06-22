@@ -247,6 +247,7 @@ const styles = StyleSheet.create({
     height: 150,
     maxHeight: 150,
     paddingTop: 20,
+    alignItems:'center'
   },
   card_list_wrapper: {
     height: height,

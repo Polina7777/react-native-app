@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import { widthScreen, heightScreen } from "../../constants/Sizes";
 import { backgroundSecondary, borderColor } from "../../constants/Colors";
@@ -22,13 +15,14 @@ function BottomModal({ data, ingredients }: any) {
   useEffect(() => {
     setModalVisible(true);
   }, []);
-
   return (
     <View style={styles.flexView}>
-      <Pressable onPress={toggleModal}></Pressable>
+      <Pressable onPress={toggleModal}>
+        <View style={styles.btnContainer}></View>
+      </Pressable>
       <Modal
         onBackdropPress={() => setModalVisible(false)}
-        //  onBackButtonPress={() => setModalVisible(false)}
+        onBackButtonPress={() => setModalVisible(false)}
         isVisible={isModalVisible}
         swipeDirection="down"
         onSwipeComplete={toggleModal}
@@ -44,31 +38,29 @@ function BottomModal({ data, ingredients }: any) {
         <View style={styles.modalContent}>
           <View style={styles.center}>
             <View style={styles.barIcon} />
-            <TouchableOpacity>
-              <ScrollView>
-                <View style={styles.constituents_wrapper}>
-                  {ingredients.map((item: IIngredient) => {
-                    return (
-                      <View key={item.id} style={styles.constituents__item}>
-                        <Image
-                          style={{
-                            width: 30,
-                            height: 30,
-                            justifyContent: "center",
-                          }}
-                          source={item.attributes.image_url}
-                          // placeholder={blurhash}
-                          // contentFit="cover"
-                          // transition={1000}
-                        />
-                      </View>
-                    );
-                  })}
-                </View>
+            <ScrollView>
+              <View style={styles.constituents_wrapper}>
+                {ingredients.map((item: IIngredient) => {
+                  return (
+                    <View key={item.id} style={styles.constituents__item}>
+                      <Image
+                        style={{
+                          width: 30,
+                          height: 30,
+                          justifyContent: "center",
+                        }}
+                        source={item.attributes.image_url}
+                        // placeholder={blurhash}
+                        // contentFit="cover"
+                        // transition={1000}
+                      />
+                    </View>
+                  );
+                })}
+              </View>
 
-                <Text style={styles.text}>{data}</Text>
-              </ScrollView>
-            </TouchableOpacity>
+              <Text style={styles.text}>{data}</Text>
+            </ScrollView>
           </View>
         </View>
       </Modal>
@@ -85,22 +77,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "transition",
   },
+
   modal: {
     justifyContent: "flex-end",
     marginHorizontal: 10,
     width: width - 20,
     alignItems: "center",
+    backgroundColor: "blue",
+    marginTop: height / 7,
   },
   modalContent: {
     backgroundColor: backgroundSecondary,
     borderRadius: 20,
-
-    minHeight: 300,
-
+    minHeight: height / 2,
     paddingVertical: 10,
     width: width - 30,
     alignSelf: "center",
-
     maxHeight: height / 1.8,
   },
   center: {
