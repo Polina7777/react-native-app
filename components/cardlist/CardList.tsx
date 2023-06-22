@@ -129,7 +129,7 @@ export default function CardList({ navigation }: CardListProps) {
         <Image
           style={styles.user_photo}
           source={
-            "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg"
           }
           // placeholder={blurhash}
           // contentFit="cover"
@@ -151,7 +151,6 @@ export default function CardList({ navigation }: CardListProps) {
                 style={{
                   width: 30,
                   height: 30,
-                  // justifyContent: "center",
                 }}
                 source={
                   "https://www.svgrepo.com/show/425202/filter-market-ecommerce.svg"
@@ -218,12 +217,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "flex-start",
     flexWrap: "wrap",
-    // width: width,
   },
   hello: {
     textAlign: "left",
     color: textPrimary,
-    fontSize: 20,
+    fontSize: 23,
     fontWeight: "600",
     paddingLeft: 5,
   },
@@ -265,14 +263,14 @@ const styles = StyleSheet.create({
   },
   user_photo: {
     backgroundColor: textPrimary,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     paddingVertical: 10,
   },
   hello_user: {
     color: textPrimary,
-    fontSize: 20,
+    fontSize: 23,
     fontWeight: "600",
     justifyContent: "space-between",
     alignSelf: "center",

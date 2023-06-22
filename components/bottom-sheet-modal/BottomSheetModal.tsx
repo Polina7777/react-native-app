@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import { widthScreen, heightScreen } from "../../constants/Sizes";
 import { backgroundSecondary, borderColor } from "../../constants/Colors";
 import { Image } from "expo-image";
 import { IIngredient } from "../../interfaces";
+import { TouchableHighlight } from "react-native";
+
+
+
 
 function BottomModal({ data, ingredients }: any) {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -25,7 +29,7 @@ function BottomModal({ data, ingredients }: any) {
         onBackButtonPress={() => setModalVisible(false)}
         isVisible={isModalVisible}
         swipeDirection="down"
-        onSwipeComplete={toggleModal}
+        // onSwipeComplete={toggleModal}
         animationIn="bounceInUp"
         animationOut="bounceOutDown"
         animationInTiming={900}
@@ -34,11 +38,16 @@ function BottomModal({ data, ingredients }: any) {
         backdropTransitionOutTiming={500}
         backdropColor="transition"
         style={styles.modal}
+        propagateSwipe={true}
+      
+    
+      
+      
       >
         <View style={styles.modalContent}>
           <View style={styles.center}>
             <View style={styles.barIcon} />
-            <ScrollView>
+
               <View style={styles.constituents_wrapper}>
                 {ingredients.map((item: IIngredient) => {
                   return (
@@ -58,9 +67,13 @@ function BottomModal({ data, ingredients }: any) {
                   );
                 })}
               </View>
-
+             <ScrollView>
+              <TouchableHighlight > 
+              {/* <TouchableOpacity> */}
               <Text style={styles.text}>{data}</Text>
-            </ScrollView>
+              {/* </TouchableOpacity> */}
+             </TouchableHighlight>
+            </ScrollView> 
           </View>
         </View>
       </Modal>
@@ -83,7 +96,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     width: width - 20,
     alignItems: "center",
-    backgroundColor: "blue",
     marginTop: height / 7,
   },
   modalContent: {
@@ -94,6 +106,7 @@ const styles = StyleSheet.create({
     width: width - 30,
     alignSelf: "center",
     maxHeight: height / 1.8,
+    // overflow:'scroll'
   },
   center: {
     display: "flex",
@@ -118,9 +131,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#bbb",
-    fontSize: 15,
+    fontSize: 17,
     marginTop: 20,
-    overflow: "scroll",
+    paddingHorizontal:10
   },
   btnContainer: {
     display: "flex",
@@ -128,6 +141,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: height,
     width: width,
+
   },
   constituents__item: {
     borderWidth: 1,
