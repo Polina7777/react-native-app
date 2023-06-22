@@ -18,15 +18,13 @@ import { backgroundPrimary, textPrimary } from "../../constants/Colors";
 import FilterModal from "../filter_form/FilterModal";
 import { CardListProps, ICard, ITag } from "../../interfaces";
 
-
-
-export default function CardList({ navigation }:CardListProps) {
+export default function CardList({ navigation }: CardListProps) {
   const [tags, setTags] = useState();
   const [cardList, setCardList] = useState([]);
   const [currentTag, setCurrentTag] = useState<ITag>();
   const [loading, setLoading] = useState(true);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
- const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState([]);
   // const [filters, setFilters] = useState({  kcal: "",
   //   serve:"",
   //   grams: ""});
@@ -62,7 +60,7 @@ export default function CardList({ navigation }:CardListProps) {
     }
   };
 
-  const handleTagClick = (item:ITag) => {
+  const handleTagClick = (item: ITag) => {
     setCurrentTag(item);
   };
 
@@ -84,7 +82,7 @@ export default function CardList({ navigation }:CardListProps) {
       // setFilters({  kcal: "",
       // serve:"",
       // grams: ""})
-      setFilters([])
+      setFilters([]);
       if (filteredCardList.length) {
         setCardList(filteredCardList);
       } else {
@@ -108,7 +106,25 @@ export default function CardList({ navigation }:CardListProps) {
   return (
     <View style={styles.card_list_wrapper}>
       <View style={styles.user_wrapper}>
-        <Text style={styles.hello_user}>Hello,User!</Text>
+        <View style={{backgroundColor:backgroundPrimary,width:300}}>
+          <Text style={styles.hello}>Hello,</Text>
+          <View style={styles.hello_wrapper}>
+            <Text style={styles.hello_user}> User!</Text>
+
+            <Image
+              style={{
+                width: 30,
+                height: 30,
+                // justifyContent: "center",
+                alignSelf: 'flex-start',
+              }}
+              source={"https://www.svgrepo.com/show/402888/waving-hand.svg"}
+              // placeholder={blurhash}
+              // contentFit="cover"
+              // transition={1000}
+            />
+          </View>
+        </View>
         <View style={styles.user_photo}></View>
       </View>
 
@@ -126,7 +142,7 @@ export default function CardList({ navigation }:CardListProps) {
                 style={{
                   width: 30,
                   height: 30,
-                  justifyContent: "center",
+                  // justifyContent: "center",
                 }}
                 source={
                   "https://www.svgrepo.com/show/425202/filter-market-ecommerce.svg"
@@ -174,7 +190,6 @@ export default function CardList({ navigation }:CardListProps) {
         />
       ) : null}
     </View>
-
   );
 }
 const { width } = widthScreen;
@@ -188,6 +203,20 @@ const styles = StyleSheet.create({
   },
   page_wrapper: {
     alignItems: "center",
+  },
+  hello_wrapper: {
+    backgroundColor: backgroundPrimary,
+    flexDirection: "row",
+    alignSelf: 'flex-start',
+    flexWrap:'wrap'
+    // width: width,
+  },
+  hello: {
+    textAlign: "left",
+    color: textPrimary,
+    fontSize: 20,
+    fontWeight: "600",
+    paddingLeft: 5,
   },
   filters_wrapper: {
     justifyContent: "space-between",
@@ -204,11 +233,12 @@ const styles = StyleSheet.create({
   user_wrapper: {
     backgroundColor: backgroundPrimary,
     flexDirection: "row",
-    width: width,
-    justifyContent: "space-between",
+    // width: width-40,
+
+     justifyContent: "space-between",
     paddingHorizontal: 20,
-    height: 170,
-    maxHeight: 180,
+    height: 150,
+    maxHeight: 150,
     paddingTop: 20,
   },
   card_list_wrapper: {
@@ -230,7 +260,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    alignSelf: "center",
     paddingVertical: 10,
   },
   hello_user: {
@@ -239,6 +268,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     justifyContent: "space-between",
     alignSelf: "center",
-    width: width / 2,
+    // width: width / 2,
   },
 });
