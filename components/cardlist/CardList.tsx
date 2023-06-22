@@ -106,7 +106,7 @@ export default function CardList({ navigation }: CardListProps) {
   return (
     <View style={styles.card_list_wrapper}>
       <View style={styles.user_wrapper}>
-        <View style={{backgroundColor:backgroundPrimary,width:300}}>
+        <View style={{ backgroundColor: backgroundPrimary, width: width / 2 }}>
           <Text style={styles.hello}>Hello,</Text>
           <View style={styles.hello_wrapper}>
             <Text style={styles.hello_user}> User!</Text>
@@ -116,7 +116,7 @@ export default function CardList({ navigation }: CardListProps) {
                 width: 30,
                 height: 30,
                 // justifyContent: "center",
-                alignSelf: 'flex-start',
+                alignSelf: "flex-start",
               }}
               source={"https://www.svgrepo.com/show/402888/waving-hand.svg"}
               // placeholder={blurhash}
@@ -125,7 +125,16 @@ export default function CardList({ navigation }: CardListProps) {
             />
           </View>
         </View>
-        <View style={styles.user_photo}></View>
+        {/* <View style={styles.user_photo}></View> */}
+        <Image
+          style={styles.user_photo}
+          source={
+            "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          }
+          // placeholder={blurhash}
+          // contentFit="cover"
+          // transition={1000}
+        />
       </View>
 
       <NavigateBar tags={tags} handleTagClick={handleTagClick} />
@@ -207,8 +216,8 @@ const styles = StyleSheet.create({
   hello_wrapper: {
     backgroundColor: backgroundPrimary,
     flexDirection: "row",
-    alignSelf: 'flex-start',
-    flexWrap:'wrap'
+    alignSelf: "flex-start",
+    flexWrap: "wrap",
     // width: width,
   },
   hello: {
@@ -233,9 +242,7 @@ const styles = StyleSheet.create({
   user_wrapper: {
     backgroundColor: backgroundPrimary,
     flexDirection: "row",
-    // width: width-40,
-
-     justifyContent: "space-between",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
     height: 150,
     maxHeight: 150,
@@ -268,6 +275,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     justifyContent: "space-between",
     alignSelf: "center",
-    // width: width / 2,
+    marginRight: 7,
   },
 });
