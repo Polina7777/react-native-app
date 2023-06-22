@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { ImageComponentDetailedCard } from "../image/ImageDetailed";
 import Loader from "../loader/Loader";
@@ -13,12 +13,13 @@ import {
   textPrimary,
 } from "../../constants/Colors";
 import { IRecipe } from "../../interfaces";
-
+import { Image } from "expo-image";
 
 export default function DetailedCard({ navigation, route }: any) {
   const [ingredients, setIngredients] = useState([]);
   const [extraInfo, setExtraInfo] = useState<string[]>([]);
   const [recipe, setRecipe] = useState<IRecipe>();
+  const [likeCliked, setLikeCliked] = useState(false);
 
   const getDetailedCardInfo = async () => {
     try {
@@ -54,9 +55,28 @@ export default function DetailedCard({ navigation, route }: any) {
   useEffect(() => {
     getDetailedCardInfo();
   }, []);
+  const likeClick = () => {
+    setLikeCliked(!likeCliked);
+  };
 
   return recipe ? (
     <View style={styles.container}>
+      <Pressable onPress={likeClick}>
+        <Image
+          style={{
+            width: 30,
+            height: 30,
+            position: "absolute",
+            left: width / 2.8,
+          }}
+          source={{
+            uri:
+              !likeCliked
+                ? "https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"
+                : "https://www.svgrepo.com/show/422454/heart-love-romantic.svg",
+          }}
+        />
+      </Pressable>
       <ImageComponentDetailedCard urlImage={recipe.attributes.image_url} />
       <View style={styles.context__wrapper}>
         <View style={styles.extra_info__wrapper}>
@@ -86,6 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: backgroundPrimary,
     paddingTop: 100,
+    position: "relative",
   },
   info__wrapper: {
     flexDirection: "column",

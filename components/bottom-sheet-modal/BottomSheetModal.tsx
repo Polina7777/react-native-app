@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     width: width - 30,
     alignSelf: "center",
     maxHeight: height / 1.8,
-    // overflow:'scroll'
+    overflow:'scroll'
   },
   center: {
     display: "flex",
@@ -131,9 +131,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#bbb",
-    fontSize: 17,
+    fontSize: 14,
     marginTop: 20,
-    paddingHorizontal:10
+    // paddingHorizontal:10
   },
   btnContainer: {
     display: "flex",

@@ -5,7 +5,7 @@ export const backgroundPrimary='#1c1424';
 
 export const backgroundSecondary= "#302137";
 export const textPrimary="#cfe38a";
-export const textSecondary="#cfe38a";
+export const textSecondary="#e7ebda";
 export const borderColor = "#cfe38a";
 
 export default {
