@@ -109,8 +109,6 @@ export default function DetailedCard({ navigation, route }: any) {
           userData?.favorite.id
         );
         const check = favorites?.find((item: IRecipe) => recipe.id === item.id);
-      
-        // !check ? addNewFavorite() : deleteFavorite();
         check ? setLikeClicked(true) : setLikeClicked(false);
         setFavoritesList(favorites);
         setCheckComplite(true);
