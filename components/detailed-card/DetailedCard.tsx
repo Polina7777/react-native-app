@@ -43,10 +43,11 @@ export default function DetailedCard({ navigation, route }: any) {
         recipe.attributes.extra_info.data.attributes.kcal,
         recipe.attributes.extra_info.data.attributes.serve,
       ];
-
+      const user = await userApi.getUsersById("1");
       setIngredients(ingredients.attributes.ingredients.data);
       setExtraInfo(extraInfoArray);
       setRecipe(recipe);
+      setUserData(user)
     } catch (err) {
       console.log(err);
     }
@@ -60,12 +61,15 @@ export default function DetailedCard({ navigation, route }: any) {
 
   useEffect(() => {
     getDetailedCardInfo();
-    getUser();
+    // getUser();
   }, []);
 
-  useEffect(() => {
-    checkIsFavorite(recipe);
-  }, [favoritesList, recipe]);
+  // useEffect(() => {
+  //   if (favoritesList?.length) {
+  //     checkIsFavorite(recipe);
+  //   }
+  // }, [favoritesList, recipe]);
+
   useEffect(() => {
     getUsersFavoritesList();
   }, [userData]);
@@ -75,32 +79,41 @@ export default function DetailedCard({ navigation, route }: any) {
     setCheckComplite(true);
     // !check ? addNewFavorite() : deleteFavorite();
     check ? setLikeClicked(true) : setLikeClicked(false);
+    return check;
 
     // }
   };
 
   const likeClick = () => {
-    if (recipe) {
-      checkIsFavorite(recipe);
+    const checkResult = checkIsFavorite(recipe);
+    if (checkResult) {
+      deleteFavorite();
+    } else {
+      addNewFavorite();
     }
   };
 
-  const getUser = async () => {
-    try {
-      const user = await userApi.getUsersById("1");
-      setUserData(user);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getUser = async () => {
+  //   try {
+  //     const user = await userApi.getUsersById("1");
+  //     setUserData(user);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const getUsersFavoritesList = async () => {
-    if (userData) {
+    if (userData && recipe) {
       try {
         const favorites = await favoritesApi.getFavorites(
           userData?.favorite.id
         );
+        const check = favorites?.find((item: IRecipe) => recipe.id === item.id);
+      
+        // !check ? addNewFavorite() : deleteFavorite();
+        check ? setLikeClicked(true) : setLikeClicked(false);
         setFavoritesList(favorites);
+        setCheckComplite(true);
       } catch (err) {
         console.log(err);
       }
@@ -128,13 +141,13 @@ export default function DetailedCard({ navigation, route }: any) {
           recipe
         );
       }
-      setLikeClicked(true);
+      setLikeClicked(false);
     } catch (err) {
       console.log(err);
     }
   };
 
-  return recipe && favoritesList?.length && checkComplite ? (
+  return recipe && checkComplite ? (
     <View style={styles.container}>
       <Pressable onPress={likeClick}>
         <Image
