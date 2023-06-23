@@ -14,12 +14,18 @@ import {
 } from "../../constants/Colors";
 import { IRecipe } from "../../interfaces";
 import { Image } from "expo-image";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { userApi } from "../../api-requests/user-api";
+import { favoritesApi } from "../../api-requests/favorites-api";
 
 export default function DetailedCard({ navigation, route }: any) {
   const [ingredients, setIngredients] = useState([]);
   const [extraInfo, setExtraInfo] = useState<string[]>([]);
   const [recipe, setRecipe] = useState<IRecipe>();
-  const [likeCliked, setLikeCliked] = useState(false);
+  const [likeClicked, setLikeClicked] = useState(false);
+  const [userData, setUserData] = useState();
+  const [favoritesList, setFavoritesList] = useState<IRecipe[]>();
+  const [checkComplite, setCheckComplite] = useState(false);
 
   const getDetailedCardInfo = async () => {
     try {
@@ -54,12 +60,81 @@ export default function DetailedCard({ navigation, route }: any) {
 
   useEffect(() => {
     getDetailedCardInfo();
+    getUser();
   }, []);
-  const likeClick = () => {
-    setLikeCliked(!likeCliked);
+
+  useEffect(() => {
+    checkIsFavorite(recipe);
+  }, [favoritesList, recipe]);
+  useEffect(() => {
+    getUsersFavoritesList();
+  }, [userData]);
+
+  const checkIsFavorite = (recipe: IRecipe) => {
+    const check = favoritesList?.find((item: IRecipe) => recipe.id === item.id);
+    setCheckComplite(true);
+    // !check ? addNewFavorite() : deleteFavorite();
+    check ? setLikeClicked(true) : setLikeClicked(false);
+
+    // }
   };
 
-  return recipe ? (
+  const likeClick = () => {
+    if (recipe) {
+      checkIsFavorite(recipe);
+    }
+  };
+
+  const getUser = async () => {
+    try {
+      const user = await userApi.getUsersById("1");
+      setUserData(user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getUsersFavoritesList = async () => {
+    if (userData) {
+      try {
+        const favorites = await favoritesApi.getFavorites(
+          userData?.favorite.id
+        );
+        setFavoritesList(favorites);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  const addNewFavorite = async () => {
+    if (userData) {
+      try {
+        const favorite = await favoritesApi.setFavorite(
+          userData.favorite.id,
+          recipe
+        );
+        setLikeClicked(true);
+      } catch (err) {
+        console.log(err, "error");
+      }
+    }
+  };
+  const deleteFavorite = async () => {
+    try {
+      if (userData) {
+        const favorite = await favoritesApi.deleteFavorite(
+          userData.favorite.id,
+          recipe
+        );
+      }
+      setLikeClicked(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return recipe && favoritesList?.length && checkComplite ? (
     <View style={styles.container}>
       <Pressable onPress={likeClick}>
         <Image
@@ -70,10 +145,9 @@ export default function DetailedCard({ navigation, route }: any) {
             left: width / 2.8,
           }}
           source={{
-            uri:
-              !likeCliked
-                ? "https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"
-                : "https://www.svgrepo.com/show/422454/heart-love-romantic.svg",
+            uri: !likeClicked
+              ? "https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"
+              : "https://www.svgrepo.com/show/422454/heart-love-romantic.svg",
           }}
         />
       </Pressable>
