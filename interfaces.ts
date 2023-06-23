@@ -52,6 +52,7 @@ export interface ICard {
   export interface NavigateBarProps {
     tags: any;
     handleTagClick: any;
+    handleFavoritesClick:any;
   }
   export interface IAttributesIngredient {
     name: string;

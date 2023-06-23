@@ -10,7 +10,7 @@ export const getFavorites = async (id: string) => {
 };
 
 export const setFavorite = async (id: string, recipe: any) => {
-  // console.log(recipe, "hghgghas");
+
   const recipeId = String(recipe.id);
   console.log(id,'id')
   try {
@@ -27,32 +27,11 @@ export const setFavorite = async (id: string, recipe: any) => {
         },
       }),
     });
-    // console.log(response, "responce");
   } catch (error) {
     console.log(error);
   }
 };
-// headers: {
-//   Accept: "application/json, text/plain, */*",
-//   "Content-Type": "application/json",
-// },
 
-//   export const setFavorite = async (id: string, favorite) => {
-//     console.log(favorite, "hghgghas");
-//     const response = await fetch(`${url_ngrok}api/favorites/7?populate=*`, {
-//       method: "PUT",
-//       body: JSON.stringify(favorite.id),
-
-//       headers: {
-//         Accept: "application/json, text/plain, */*",
-//         "Content-Type": "application/json",
-//       },
-//     });
-//   const data = await response.json();
-//   // const user = data.data;
-//   // return user;
-//   return data;
-// };
 export const deleteFavorite = async (id: string, recipe:any) => {
   const recipeId = String(recipe.id);
   try {
