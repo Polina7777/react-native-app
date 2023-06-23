@@ -29,7 +29,7 @@ function BottomModal({ data, ingredients }: any) {
         onBackButtonPress={() => setModalVisible(false)}
         isVisible={isModalVisible}
         swipeDirection="down"
-        // onSwipeComplete={toggleModal}
+        onSwipeComplete={toggleModal}
         animationIn="bounceInUp"
         animationOut="bounceOutDown"
         animationInTiming={900}

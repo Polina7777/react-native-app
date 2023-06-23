@@ -61,14 +61,7 @@ export default function DetailedCard({ navigation, route }: any) {
 
   useEffect(() => {
     getDetailedCardInfo();
-    // getUser();
   }, []);
-
-  // useEffect(() => {
-  //   if (favoritesList?.length) {
-  //     checkIsFavorite(recipe);
-  //   }
-  // }, [favoritesList, recipe]);
 
   useEffect(() => {
     getUsersFavoritesList();
@@ -77,11 +70,8 @@ export default function DetailedCard({ navigation, route }: any) {
   const checkIsFavorite = (recipe: IRecipe) => {
     const check = favoritesList?.find((item: IRecipe) => recipe.id === item.id);
     setCheckComplite(true);
-    // !check ? addNewFavorite() : deleteFavorite();
     check ? setLikeClicked(true) : setLikeClicked(false);
     return check;
-
-    // }
   };
 
   const likeClick = () => {
@@ -93,14 +83,6 @@ export default function DetailedCard({ navigation, route }: any) {
     }
   };
 
-  // const getUser = async () => {
-  //   try {
-  //     const user = await userApi.getUsersById("1");
-  //     setUserData(user);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   const getUsersFavoritesList = async () => {
     if (userData && recipe) {
@@ -126,6 +108,7 @@ export default function DetailedCard({ navigation, route }: any) {
           recipe
         );
         setLikeClicked(true);
+        getUsersFavoritesList()
       } catch (err) {
         console.log(err, "error");
       }
@@ -140,6 +123,7 @@ export default function DetailedCard({ navigation, route }: any) {
         );
       }
       setLikeClicked(false);
+      getUsersFavoritesList()
     } catch (err) {
       console.log(err);
     }
