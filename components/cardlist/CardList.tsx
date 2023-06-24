@@ -1,11 +1,8 @@
 import {
   Pressable,
-  ScrollView,
   StyleSheet,
-  TouchableOpacity,
 } from "react-native";
 import { View, Text } from "../../components/Themed";
-import Card from "../../components/card/Card";
 import React, { useEffect, useState } from "react";
 import NavigateBar from "../navigate-bar/NavigateBar";
 import { recipesApi } from "../../api-requests/recipes-api";
@@ -20,7 +17,6 @@ import { CardListProps, ICard, ITag } from "../../interfaces";
 import { favoritesApi } from "../../api-requests/favorites-api";
 import { userApi } from "../../api-requests/user-api";
 import { url_ngrok } from "../../api-requests";
-import ErrorPage from "../error-page/Error-page";
 import RecipeList from "../recipe-list/RecipeList";
 
 export default function CardList({ navigation }: CardListProps) {
@@ -253,11 +249,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: width - 40,
     backgroundColor: backgroundPrimary,
-  },
-  scroll_wrapper: {
-    flex: 1,
-    backgroundColor: backgroundPrimary,
-    width: width,
   },
   user_wrapper: {
     backgroundColor: backgroundPrimary,
