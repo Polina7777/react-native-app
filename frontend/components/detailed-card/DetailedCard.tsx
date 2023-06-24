@@ -51,6 +51,7 @@ export default function DetailedCard({ navigation, route }: any) {
     } catch (err) {
       console.log(err);
   };
+}
 
   useEffect(() => {
     navigation.setOptions({
@@ -233,4 +234,4 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 });
-}
+

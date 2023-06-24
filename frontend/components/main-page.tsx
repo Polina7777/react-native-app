@@ -1,10 +1,11 @@
 import CardList from "./cardlist/CardList";
-import DetailedCard from "./detailed-card/DetailedCard";
+// import DetailedCard from "./detailed-card/DetailedCard";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import "react-native-gesture-handler";
 import Loader from "./loader/Loader";
 import { backgroundPrimary, textPrimary } from "../constants/Colors";
+import DetailedCard from "./detailed-card/DetailedCard";
 
 export default function MainPage() {
   const Stack = createNativeStackNavigator();

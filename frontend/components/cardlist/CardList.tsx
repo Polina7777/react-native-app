@@ -145,8 +145,9 @@ export default function CardList({ navigation }: CardListProps) {
       return `${currentTag?.attributes.name}`;
     } else if (favFilter) {
       return "Favorites";
-    } else {
-      ("All");
+    }
+     else {
+     return ("All");
     }
   };
 

@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import RnVerticalSlider from 'rn-vertical-slider';
 import { Ionicons } from '@expo/vector-icons';
-import { widthScreen, heightScreen } from '../../constants/Sizes';
+import { heightScreen } from '../../constants/Sizes';
 import { textPrimary, textSecondary } from '../../constants/Colors';
 
 const renderIcon = (newVal: number) => {
@@ -22,7 +22,6 @@ const renderIcon = (newVal: number) => {
       styles.name = 'heart-dislike-circle-outline';
     }
     return styles;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newVal]);
   return (
     <View>
@@ -67,19 +66,13 @@ const SliderVertical: React.FC = ({position}:any) => {
 };
 
 export default SliderVertical;
-// const { width } = widthScreen;
 const { height } = heightScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
     paddingLeft:10,
     paddingRight:30,
-    // paddingTop:20,
-    // overflow:'scroll',
     alignContent:'flex-start',
-    // flexDirection:'row'
   
   },
 });
