@@ -10,9 +10,7 @@ export const getFavorites = async (id: string) => {
 };
 
 export const setFavorite = async (id: string, recipe: any) => {
-
   const recipeId = String(recipe.id);
-  console.log(id,'id')
   try {
     const response = await fetch(`${url_ngrok}api/favorites/${id}`, {
       headers:{

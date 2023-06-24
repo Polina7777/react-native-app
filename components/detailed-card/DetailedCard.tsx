@@ -12,18 +12,18 @@ import {
   borderColor,
   textPrimary,
 } from "../../constants/Colors";
-import { IRecipe } from "../../interfaces";
+import { IRecipe, IUser } from "../../interfaces";
 import { Image } from "expo-image";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { userApi } from "../../api-requests/user-api";
 import { favoritesApi } from "../../api-requests/favorites-api";
+
 
 export default function DetailedCard({ navigation, route }: any) {
   const [ingredients, setIngredients] = useState([]);
   const [extraInfo, setExtraInfo] = useState<string[]>([]);
   const [recipe, setRecipe] = useState<IRecipe>();
   const [likeClicked, setLikeClicked] = useState(false);
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState<IUser>();
   const [favoritesList, setFavoritesList] = useState<IRecipe[]>();
   const [checkComplite, setCheckComplite] = useState(false);
 
@@ -50,7 +50,6 @@ export default function DetailedCard({ navigation, route }: any) {
       setUserData(user)
     } catch (err) {
       console.log(err);
-    }
   };
 
   useEffect(() => {
@@ -75,6 +74,7 @@ export default function DetailedCard({ navigation, route }: any) {
   };
 
   const likeClick = () => {
+    if(!recipe) return
     const checkResult = checkIsFavorite(recipe);
     if (checkResult) {
       deleteFavorite();

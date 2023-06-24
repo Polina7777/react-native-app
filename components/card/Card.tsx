@@ -1,16 +1,10 @@
-import { Dimensions, StyleSheet } from "react-native";
+import {StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import ImageComponent from "../image/Image";
-import { widthScreen, heightScreen } from "../../constants/Sizes";
+import { widthScreen} from "../../constants/Sizes";
 import { backgroundSecondary, textPrimary } from "../../constants/Colors";
+import { CardProps } from "../../interfaces";
 
-export interface CardProps {
-  title: string;
-  description: string;
-  options?: any;
-  imageUrl?: any;
-  id?: number;
-}
 
 export default function Card({
   title,

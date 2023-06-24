@@ -20,25 +20,31 @@ import { CardListProps, ICard, ITag } from "../../interfaces";
 import { favoritesApi } from "../../api-requests/favorites-api";
 import { userApi } from "../../api-requests/user-api";
 import { url_ngrok } from "../../api-requests";
+import ErrorPage from "../error-page/Error-page";
+import RecipeList from "../recipe-list/RecipeList";
 
 export default function CardList({ navigation }: CardListProps) {
-  const [tags, setTags] = useState();
-  const [cardList, setCardList] = useState([]);
+  const [tags, setTags] = useState<ITag[]>();
+  const [cardList, setCardList] = useState<ICard[]>([]);
   const [currentTag, setCurrentTag] = useState<ITag>();
   const [loading, setLoading] = useState(true);
   const [filterModalVisible, setFilterModalVisible] = useState(false);
   const [filters, setFilters] = useState([]);
   const [favFilter, setFavFilter] = useState(false);
+  const [error, setError] = useState(false);
 
   const getCardsInfo = async () => {
+    setError(false);
+    setLoading(true);
+    setFavFilter(false);
     try {
-      setLoading(true);
-      setFavFilter(false);
       const info = await recipesApi.getAllRecipesWithIngredientCollection();
       setCardList(info);
-      setLoading(false);
     } catch (err) {
+      setError(true);
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,68 +59,81 @@ export default function CardList({ navigation }: CardListProps) {
   }, [currentTag]);
 
   const filterByTag = async (tag: string) => {
-    setFavFilter(false)
+    setFavFilter(false);
+    setError(false);
+    setLoading(true);
     try {
-      setLoading(true);
       const filteredList = await filtersApi.filtersByTags(tag);
       setCardList(filteredList);
-      setLoading(false);
     } catch (err) {
+      setError(true);
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const filterByFavorites = async (arr: number[]) => {
     setLoading(true);
     setFavFilter(true);
-    const user = await userApi.getUsersById("1");
-    const filteredList = await favoritesApi.getFavorites(user.favorite.id);
-    const idArr = filteredList.map((item: any) => item.id);
-    const result = [];
-    for (const item of idArr) {
-      result.push(
-        await fetch(`${url_ngrok}api/foods/${item}?populate=*`)
-          .then((response) => response.json())
-          .then((response) => {
-            return response.data;
-          })
-          .catch((error) => console.error(error))
-      );
+    setError(false);
+    try {
+      const user = await userApi.getUsersById("1");
+      const filteredList = await favoritesApi.getFavorites(user.favorite.id);
+      const idArr = filteredList.map((item: any) => item.id);
+      const resultArray = [];
+      for (const item of idArr) {
+        const response = await fetch(
+          `${url_ngrok}api/foods/${item}?populate=*`
+        );
+        const result = await response.json();
+        resultArray.push(result.data);
+      }
+      setCardList(resultArray);
+    } catch (error) {
+      setError(true);
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-    setCardList(result);
-    setLoading(false);
-    return result;
   };
 
   const handleTagClick = (item: ITag) => {
-    setFavFilter(false)
+    setFavFilter(false);
     setCurrentTag(item);
   };
 
   const getCategories = async () => {
+    setLoading(true);
+    setError(false);
     try {
-      setLoading(true);
       const tagsList = await categoryApi.getCategoriesOfRecipes();
       setTags(tagsList);
-      setLoading(false);
     } catch (err) {
+      setError(true);
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const getFilteredCardListByFiltersModal = async () => {
+    setLoading(true);
+    setError(false);
     try {
-      setLoading(true);
       const filteredCardList = await filtersApi.filtersByFiltersForm(filters);
       setFilters([]);
       if (filteredCardList.length) {
         setCardList(filteredCardList);
       } else {
-        setLoading(true);
+        setError(true);
       }
       setLoading(false);
     } catch (err) {
+      setError(true);
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -127,15 +146,15 @@ export default function CardList({ navigation }: CardListProps) {
     }
   }, [filters]);
 
-  const numberTitle = () =>{
-    if(currentTag && !favFilter) {
-      return `${currentTag?.attributes.name}`
-    } else if(favFilter){
-      return 'Favorites'
-    }else{
-      'All'
+  const numberTitle = () => {
+    if (currentTag && !favFilter) {
+      return `${currentTag?.attributes.name}`;
+    } else if (favFilter) {
+      return "Favorites";
+    } else {
+      ("All");
     }
-  }
+  };
 
   return (
     <View style={styles.card_list_wrapper}>
@@ -168,20 +187,12 @@ export default function CardList({ navigation }: CardListProps) {
         handleTagClick={handleTagClick}
         handleFavoritesClick={filterByFavorites}
       />
-      {cardList.length && !loading ? (
+
+      {!loading ? (
         <View style={styles.container}>
           <View style={styles.filters_wrapper}>
             <Text style={styles.count_of_recipes}>
-              {`${cardList.length} ${numberTitle()}`
-              // ${
-                // currentTag
-                //   ? currentTag?.attributes.name
-                //   : !favFilter
-                //   ? "All"
-                //   : "Favorites"
-              // }`
-             // ${favFilter?'Favorites': currentTag? currentTag?.attributes.name : 'All'
-              }
+              {`${cardList.length} ${numberTitle()}`}
             </Text>
             <Pressable onPress={toggleModal}>
               <Image
@@ -195,31 +206,8 @@ export default function CardList({ navigation }: CardListProps) {
               />
             </Pressable>
           </View>
-          <ScrollView style={styles.scroll_wrapper}>
-            {cardList.map((item: ICard, index) => {
-              return (
-                <TouchableOpacity key={index} style={styles.container}>
-                  <Pressable
-                    onPress={() => {
-                      navigation.navigate("Card", {
-                        itemId: item.id,
-                        title: item.attributes.title,
-                      });
-                    }}
-                  >
-                    <Card
-                      title={item.attributes.title}
-                      description={item.attributes.description}
-                      options={item.attributes.small_extra_info.data.attributes}
-                      imageUrl={item.attributes.image_url}
-                      id={item.id}
-                      key={index}
-                    />
-                  </Pressable>
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
+
+          <RecipeList cardList={cardList} error={error} navigation={navigation} />
         </View>
       ) : (
         <Loader />

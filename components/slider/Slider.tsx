@@ -35,9 +35,7 @@ const renderIcon = (newVal: number) => {
 };
 
 const SliderVertical: React.FC = ({position}:any) => {
-  // console.log(position,'kkjsvksv')
  const [value, setValue] = React.useState(position);
-//  console.log(value,'value')
   return (
     <View style={styles.container}>
       <RnVerticalSlider

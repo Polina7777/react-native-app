@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text,View } from "react-native";
 import Modal from "react-native-modal";
 import { widthScreen, heightScreen } from "../../constants/Sizes";
 import { backgroundSecondary, borderColor } from "../../constants/Colors";
@@ -39,10 +39,6 @@ function BottomModal({ data, ingredients }: any) {
         backdropColor="transition"
         style={styles.modal}
         propagateSwipe={true}
-      
-    
-      
-      
       >
         <View style={styles.modalContent}>
           <View style={styles.center}>
@@ -59,9 +55,6 @@ function BottomModal({ data, ingredients }: any) {
                           justifyContent: "center",
                         }}
                         source={item.attributes.image_url}
-                        // placeholder={blurhash}
-                        // contentFit="cover"
-                        // transition={1000}
                       />
                     </View>
                   );
@@ -69,9 +62,7 @@ function BottomModal({ data, ingredients }: any) {
               </View>
              <ScrollView>
               <TouchableHighlight > 
-              {/* <TouchableOpacity> */}
               <Text style={styles.text}>{data}</Text>
-              {/* </TouchableOpacity> */}
              </TouchableHighlight>
             </ScrollView> 
           </View>
