@@ -16,11 +16,13 @@ import { IRecipe, IUser } from "../../interfaces";
 import { Image } from "expo-image";
 import { userApi } from "../../api-requests/user-api";
 import { favoritesApi } from "../../api-requests/favorites-api";
-
+import VerticalStepIndicator from "../slider/Slider";
+import { processApi } from "../../api-requests/process-api";
 
 export default function DetailedCard({ navigation, route }: any) {
   const [ingredients, setIngredients] = useState([]);
   const [extraInfo, setExtraInfo] = useState<string[]>([]);
+  const [process, setProcess] = useState();
   const [recipe, setRecipe] = useState<IRecipe>();
   const [likeClicked, setLikeClicked] = useState(false);
   const [userData, setUserData] = useState<IUser>();
@@ -32,26 +34,30 @@ export default function DetailedCard({ navigation, route }: any) {
       const recipe = await recipesApi.getRecipeByIdWithIngredientCollection(
         route.params.itemId
       );
+      const process = await processApi.getProcessByIdWithSteps(
+        recipe.attributes.processing.data.id
+      );
       const ingredients =
         await ingredientsApi.getIngredientCollectionByIdWithIngredients(
           recipe.attributes.ingredient_collection.data.id
         );
-
       const extraInfoArray = [
         recipe.attributes.extra_info.data.attributes.min,
         recipe.attributes.extra_info.data.attributes.grams,
         recipe.attributes.extra_info.data.attributes.kcal,
         recipe.attributes.extra_info.data.attributes.serve,
       ];
+
       const user = await userApi.getUsersById("1");
       setIngredients(ingredients.attributes.ingredients.data);
       setExtraInfo(extraInfoArray);
       setRecipe(recipe);
-      setUserData(user)
+      setProcess(process.attributes.process_steps.data);
+      setUserData(user);
     } catch (err) {
       console.log(err);
+    }
   };
-}
 
   useEffect(() => {
     navigation.setOptions({
@@ -75,7 +81,7 @@ export default function DetailedCard({ navigation, route }: any) {
   };
 
   const likeClick = () => {
-    if(!recipe) return
+    if (!recipe) return;
     const checkResult = checkIsFavorite(recipe);
     if (checkResult) {
       deleteFavorite();
@@ -83,7 +89,6 @@ export default function DetailedCard({ navigation, route }: any) {
       addNewFavorite();
     }
   };
-
 
   const getUsersFavoritesList = async () => {
     if (userData && recipe) {
@@ -109,7 +114,7 @@ export default function DetailedCard({ navigation, route }: any) {
           recipe
         );
         setLikeClicked(true);
-        getUsersFavoritesList()
+        getUsersFavoritesList();
       } catch (err) {
         console.log(err, "error");
       }
@@ -124,7 +129,7 @@ export default function DetailedCard({ navigation, route }: any) {
         );
       }
       setLikeClicked(false);
-      getUsersFavoritesList()
+      getUsersFavoritesList();
     } catch (err) {
       console.log(err);
     }
@@ -159,7 +164,7 @@ export default function DetailedCard({ navigation, route }: any) {
           })}
         </View>
         <BottomModal
-          data={recipe.attributes.process}
+          data={process}
           ingredients={ingredients}
         />
       </View>
@@ -179,11 +184,10 @@ const styles = StyleSheet.create({
     // paddingTop: 100,
     height:height,
     position: "relative",
-    
   },
   info__wrapper: {
     flexDirection: "column",
-    height:height,
+    height: height,
     backgroundColor: "transition",
     fontSize: 12,
     fontWeight: "bold",
@@ -238,4 +242,3 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 });
-
