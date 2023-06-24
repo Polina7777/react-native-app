@@ -4,7 +4,7 @@ import { ImageComponentDetailedCard } from "../image/ImageDetailed";
 import Loader from "../loader/Loader";
 import { ingredientsApi } from "../../api-requests/ingredients-api";
 import { useEffect, useState } from "react";
-import { widthScreen } from "../../constants/Sizes";
+import { heightScreen, widthScreen } from "../../constants/Sizes";
 import { recipesApi } from "../../api-requests/recipes-api";
 import BottomModal from "../bottom-sheet-modal/BottomSheetModal";
 import {
@@ -169,18 +169,21 @@ export default function DetailedCard({ navigation, route }: any) {
   );
 }
 const { width } = widthScreen;
+const { height } = heightScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: backgroundPrimary,
-    paddingTop: 100,
+    // paddingTop: 100,
+    height:height,
     position: "relative",
+    
   },
   info__wrapper: {
     flexDirection: "column",
-
+    height:height,
     backgroundColor: "transition",
     fontSize: 12,
     fontWeight: "bold",
@@ -198,6 +201,7 @@ const styles = StyleSheet.create({
     display: "flex",
     backgroundColor: "transition",
     justifyContent: "center",
+    height:height/1.6,
   },
   extra_info__wrapper: {
     backgroundColor: "transition",
