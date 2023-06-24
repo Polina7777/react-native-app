@@ -1,7 +1,4 @@
-import {
-  Pressable,
-  StyleSheet,
-} from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import { View, Text } from "../../components/Themed";
 import React, { useEffect, useState } from "react";
 import NavigateBar from "../navigate-bar/NavigateBar";
@@ -95,6 +92,7 @@ export default function CardList({ navigation }: CardListProps) {
   };
 
   const handleTagClick = (item: ITag) => {
+    setError(false);
     setFavFilter(false);
     setCurrentTag(item);
   };
@@ -188,7 +186,7 @@ export default function CardList({ navigation }: CardListProps) {
         <View style={styles.container}>
           <View style={styles.filters_wrapper}>
             <Text style={styles.count_of_recipes}>
-              {`${cardList.length} ${numberTitle()}`}
+              {error ? null : `${cardList.length} ${numberTitle()}`}
             </Text>
             <Pressable onPress={toggleModal}>
               <Image
@@ -203,7 +201,11 @@ export default function CardList({ navigation }: CardListProps) {
             </Pressable>
           </View>
 
-          <RecipeList cardList={cardList} error={error} navigation={navigation} />
+          <RecipeList
+            cardList={cardList}
+            error={error}
+            navigation={navigation}
+          />
         </View>
       ) : (
         <Loader />
