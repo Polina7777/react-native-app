@@ -75,7 +75,7 @@ const { width } = widthScreen;
 const { height } = heightScreen;
 const styles = StyleSheet.create({
   flexView: {
-    flex: 1,
+   // flex: 1,
     backgroundColor: "transition",
   },
 
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     width: width - 30,
     alignSelf: "center",
-    marginTop: height / 7,
+   // marginTop: height / 7,
     // height:height
   },
   modalContent: {
@@ -94,10 +94,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     width: width - 30,
     alignSelf: "center",
-    maxHeight: height / 1.8,
+   // maxHeight: height / 1.8,
     // height:height
     // overflowY:'scroll',
-    overflow:'scroll'
+   // overflow:'scroll'
   },
   center: {
     display: "flex",
