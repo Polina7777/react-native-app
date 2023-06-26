@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, TouchableHighlight, View } from "react-native";
 import Modal from "react-native-modal";
 import { widthScreen, heightScreen } from "../../constants/Sizes";
 import { backgroundSecondary, borderColor } from "../../constants/Colors";
 import { Image } from "expo-image";
 import { IIngredient } from "../../interfaces";
-import { TouchableHighlight } from "react-native";
 
 import VerticalStepIndicator from "../slider/Slider";
+import { ScrollView } from "react-native-gesture-handler";
 
 function BottomModal({ data, ingredients }: any) {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -60,7 +60,9 @@ function BottomModal({ data, ingredients }: any) {
               })}
             </View>
             {/* <View style={{flex:1}}> */}
+            {/* <TouchableHighlight> */}
               <VerticalStepIndicator data={data} />
+              {/* </TouchableHighlight> */}
             {/* </View> */}
           </View>
         </View>
@@ -78,25 +80,26 @@ const styles = StyleSheet.create({
     // flex: 1,
     backgroundColor: "transition",
     width:width-20,
-    height:height/2
+    height:height/2.2
   },
 
   modal: {
     justifyContent: "flex-end",
     marginHorizontal: 10,
     width: width - 30,
-    // alignSelf: "center",
+    alignSelf: "center",
    // marginTop: height / 7,
-     height:height/2
+     height:height/2.2,
+    paddingVTop:10
   },
   modalContent: {
     backgroundColor: backgroundSecondary,
     borderRadius: 20,
-    minHeight: height / 2,
+    // minHeight: height / 2,
     paddingVertical: 10,
     width: width - 30,
     alignSelf: "center",
-     height:height/1.8
+     height:height/2
 
   },
   center: {

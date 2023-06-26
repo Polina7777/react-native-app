@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
-import { ScrollView} from 'react-native-gesture-handler';
+import { StyleSheet, View, Text, FlatList, ScrollViewComponent} from 'react-native';
+import { ScrollView, TouchableOpacity, TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import StepIndicator from 'react-native-step-indicator';
 import { textPrimary, textSecondary } from '../../constants/Colors';
-import { widthScreen } from '../../constants/Sizes';
+import { heightScreen, widthScreen } from '../../constants/Sizes';
 import { TouchableHighlight } from 'react-native';
+
 
 const stepIndicatorStyles = {
   stepIndicatorSize: 35,
@@ -40,7 +41,7 @@ export default function VerticalStepIndicator({data}:any) {
         <Text style={styles.title}>{item.attributes.name}</Text>
         <Text style={styles.body}>{item.attributes.description}</Text>
       </View>
-      </TouchableHighlight>  
+     </TouchableHighlight>  
     );
   };
 
@@ -53,7 +54,10 @@ export default function VerticalStepIndicator({data}:any) {
 
   return (
     <View style={styles.container}>
+   
+      <View style={{height:height/3,flexDirection:'row', width:width-20, padding:10}}>
       <View style={styles.stepIndicator}>
+
         <StepIndicator
           customStyles={stepIndicatorStyles}
           stepCount={data.length}
@@ -61,18 +65,23 @@ export default function VerticalStepIndicator({data}:any) {
           currentPosition={currentPage}
         />
       </View>
+    
       <FlatList
         // style={{flexGrow:1}}
         data={data}
         renderItem={renderPage}
         onViewableItemsChanged={onViewableItemsChanged}
-        // viewabilityConfig={viewabilityConfig}
         // scrollEnabled={true}
+        scrollToOverflowEnabled={true}
       />
+   
+      </View>
+      
     </View>
   );
 }
 const {width} = widthScreen;
+const {height} = heightScreen;
 const styles = StyleSheet.create({
   container: {
       //  flex: 1,
@@ -83,26 +92,27 @@ const styles = StyleSheet.create({
   },
   stepIndicator: {
     // flex:1,
-   marginVertical: 5,
-   paddingHorizontal:30,
+   paddingHorizontal:20,
   },
   rowItem: {
+    paddingLeft:10,
     //  flex: 3,
     // paddingVertical: 10,
   },
   title: {
-    // flex: 1,
+    flex: 1,
     fontSize: 15,
     color: textSecondary,
-    paddingVertical: 8,
+    paddingVertical: 20,
     fontWeight: '600',
   },
   body: {
      flex: 1,
-    fontSize: 10,
+    fontSize: 13,
     color: textSecondary,
-    // width:300,
+     width:width/2,
     // lineHeight: 12,
     // marginRight: 8,
+    marginBottom:10
   },
 });

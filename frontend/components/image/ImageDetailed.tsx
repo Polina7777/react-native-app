@@ -5,10 +5,10 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
 
   image_detailed: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    margin: 20,
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    margin: 30,
     alignSelf:'center'
   },
 });
