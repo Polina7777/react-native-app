@@ -17,6 +17,14 @@
     },
     "description": {
       "type": "string"
+    },
+    "check": {
+      "type": "string",
+      "default": "https://www.svgrepo.com/show/468260/check-circle.svg"
+    },
+    "uncheck": {
+      "type": "string",
+      "default": "https://www.svgrepo.com/show/470763/check-circle.svg"
     }
   }
 }
