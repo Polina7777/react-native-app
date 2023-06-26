@@ -59,9 +59,9 @@ function BottomModal({ data, ingredients }: any) {
                 );
               })}
             </View>
-            <View style={{}}>
+            {/* <View style={{flex:1}}> */}
               <VerticalStepIndicator data={data} />
-            </View>
+            {/* </View> */}
           </View>
         </View>
       </Modal>
@@ -75,17 +75,19 @@ const { width } = widthScreen;
 const { height } = heightScreen;
 const styles = StyleSheet.create({
   flexView: {
-   // flex: 1,
+    // flex: 1,
     backgroundColor: "transition",
+    width:width-20,
+    height:height/2
   },
 
   modal: {
     justifyContent: "flex-end",
     marginHorizontal: 10,
     width: width - 30,
-    alignSelf: "center",
+    // alignSelf: "center",
    // marginTop: height / 7,
-    // height:height
+     height:height/2
   },
   modalContent: {
     backgroundColor: backgroundSecondary,
@@ -94,13 +96,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     width: width - 30,
     alignSelf: "center",
-   // maxHeight: height / 1.8,
-    // height:height
-    // overflowY:'scroll',
-   // overflow:'scroll'
+     height:height/1.8
+
   },
   center: {
-    display: "flex",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
@@ -109,22 +108,16 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "center",
-    backgroundColor: backgroundSecondary,
-    alignSelf: "center",
+     justifyContent: "center",
+    // backgroundColor: backgroundSecondary,
+     alignSelf: "center",
+
   },
   barIcon: {
     width: 40,
     height: 5,
     backgroundColor: "#bbb",
     borderRadius: 3,
-  },
-  text: {
-    color: "#bbb",
-    fontSize: 14,
-    marginTop: 20,
-    width: 170,
-    // paddingHorizontal:10
   },
   btnContainer: {
     display: "flex",

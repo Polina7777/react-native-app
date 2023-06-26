@@ -18,6 +18,7 @@ import { userApi } from "../../api-requests/user-api";
 import { favoritesApi } from "../../api-requests/favorites-api";
 import VerticalStepIndicator from "../slider/Slider";
 import { processApi } from "../../api-requests/process-api";
+import React from "react";
 
 export default function DetailedCard({ navigation, route }: any) {
   const [ingredients, setIngredients] = useState([]);
@@ -177,17 +178,16 @@ const { width } = widthScreen;
 const { height } = heightScreen;
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
+    // flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
     backgroundColor: backgroundPrimary,
     // paddingTop: 100,
-   // height:height,
     //position: "relative",
+    height:height
   },
   info__wrapper: {
     flexDirection: "column",
-    height: height,
     backgroundColor: "transition",
     fontSize: 12,
     fontWeight: "bold",
@@ -202,10 +202,9 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   context__wrapper: {
-    //display: "flex",
     backgroundColor: "transition",
     justifyContent: "center",
-    //height:height/1.6,
+  
   },
   extra_info__wrapper: {
     backgroundColor: "transition",

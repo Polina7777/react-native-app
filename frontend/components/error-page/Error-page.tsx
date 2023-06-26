@@ -3,10 +3,16 @@ import { Text, View } from "../../components/Themed";
 import { Image } from "expo-image";
 import { textPrimary, backgroundSecondary } from "../../constants/Colors";
 import { heightScreen, widthScreen } from "../../constants/Sizes";
+import React from "react";
+import VerticalStepIndicator from "../slider/Slider";
+
+
+
 
 export default function ErrorPage() {
   return (
     <View style={styles.error__wrapper}>
+  
       <Image
         style={{
           width: 60,
