@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text, FlatList, ScrollViewComponent, ImageBackground} from 'react-native';
+import { StyleSheet, View, Text, FlatList, ScrollViewComponent, ImageBackground, SafeAreaViewComponent, SafeAreaView} from 'react-native';
 import { ScrollView, TouchableOpacity, TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import StepIndicator from 'react-native-step-indicator';
 import { backgroundSecondary, textPrimary, textSecondary } from '../../constants/Colors';
@@ -32,6 +32,16 @@ const translationY = useSharedValue(0)
       
       };
     });
+    // const stylez2 = useAnimatedStyle(() => {
+    //   let heightOfSlider = translationY.value 
+    //   return {
+    //     height: heightOfSlider < 0 ? 100 : 270,
+      
+    //   };
+    // });
+  
+  
+
     const [currentIndex, setCurrentIndex] = useState(0)
 
     const toggleIndex = (index: number) => {
@@ -62,9 +72,14 @@ const translationY = useSharedValue(0)
   }, []);
 
   return (
+    <SafeAreaView>
     <Animated.View style={[styles.container]}>  
-<Animated.View  style={[{ borderLeftWidth:3,
-            borderLeftColor:backgroundSecondary,height:height/8,position:'absolute',left:33},stylez]}>
+    
+<Animated.View  style={[{ borderLeftWidth:2,
+            borderLeftColor:textPrimary,height:height/8,position:'absolute',left:33,zIndex:400},stylez]}>
+              </Animated.View>
+              <Animated.View  style={[{ borderLeftWidth:0.5,
+            borderLeftColor:textSecondary,height:270,position:'absolute',left:34.5,top:5}]}>
               </Animated.View>
             <Animated.ScrollView 
       style={{ borderLeftWidth:1,
@@ -90,10 +105,10 @@ const translationY = useSharedValue(0)
                                borderWidth:1,
                                borderRadius:17.5,
                                justifyContent: "center",
-                               backgroundColor: translationY.value > 50 * index? textPrimary : textSecondary,
+                               backgroundColor: translationY.value > 50 * index || index === 0? textPrimary : textSecondary,
                                position:'absolute',
                                left:-44,
-                               top:-15,
+                               top:-35,
                                zIndex:1000,
                              }]}
                              />
@@ -109,6 +124,7 @@ const translationY = useSharedValue(0)
        </Animated.ScrollView>
       
     </Animated.View>
+    </SafeAreaView>
   );
 }
 const colorCheck = 'https://www.svgrepo.com/show/468260/check-circle.svg';
@@ -127,12 +143,10 @@ const styles = StyleSheet.create({
     alignItems:'flex-start',
     //  flex: 3,
     width:200,
-     paddingVertical: 20,
-     zIndex:2000
+     paddingVertical: 40,
   },
   title: {
-    // flex: 1,
-    fontSize: 15,
+    fontSize: 17,
     color: textSecondary,
     fontWeight: '600',
     paddingLeft:20
