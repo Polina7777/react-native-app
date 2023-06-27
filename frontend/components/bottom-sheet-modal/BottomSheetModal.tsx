@@ -59,11 +59,7 @@ function BottomModal({ data, ingredients }: any) {
                 );
               })}
             </View>
-            {/* <View style={{flex:1}}> */}
-            {/* <TouchableHighlight> */}
               <VerticalStepIndicator data={data} />
-              {/* </TouchableHighlight> */}
-            {/* </View> */}
           </View>
         </View>
       </Modal>
@@ -77,7 +73,6 @@ const { width } = widthScreen;
 const { height } = heightScreen;
 const styles = StyleSheet.create({
   flexView: {
-    // flex: 1,
     backgroundColor: "transition",
     width:width-20,
     height:height/2.2
@@ -88,14 +83,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     width: width - 30,
     alignSelf: "center",
-   // marginTop: height / 7,
      height:height/2.2,
     paddingVTop:10
   },
   modalContent: {
     backgroundColor: backgroundSecondary,
     borderRadius: 20,
-    // minHeight: height / 2,
     paddingVertical: 10,
     width: width - 30,
     alignSelf: "center",
@@ -112,7 +105,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flexDirection: "row",
      justifyContent: "center",
-    // backgroundColor: backgroundSecondary,
      alignSelf: "center",
 
   },
