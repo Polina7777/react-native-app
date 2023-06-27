@@ -19,7 +19,7 @@ React.useEffect(()=>{setCurrentIndex(0)},[])
         height: heightOfSlider < 0 || heightOfSlider === 0? 0 : heightOfSlider+95,
 
       };
-    });  
+    });   
     const toggleIndex = (index: number) => {
       setCurrentIndex(index)
     }
@@ -43,30 +43,27 @@ React.useEffect(()=>{setCurrentIndex(0)},[])
     })
   return (
     <SafeAreaView>
-    <Animated.View style={[styles.container]}>  
-    
+    <View style={[styles.container]}>  
 <Animated.View  style={[styles.general_sring,{height:data.lenght===1?180:0},stylez]}/>
-              <Animated.View  style={[styles.string,{minHeight:180 * (data.length - 1 )- translationY.value}]}>
-              </Animated.View>
-            <Animated.ScrollView 
-      style={{ borderLeftWidth:1,
-    borderLeftColor:backgroundSecondary,height:height/3,width:width-100,marginHorizontal:10}}
+ <Animated.View  style={[styles.string,{minHeight:180 * (data.length - 1 )- translationY.value}]}/>
+      <Animated.ScrollView 
+      style={[styles.scroll_view]}
         onScroll={scrollHandler}
         scrollEventThrottle={30}
-        scrollToOverflowEnabled={false}
+        scrollToOverflowEnabled={true}
         alwaysBounceVertical={false}
         centerContent={true}
         disableIntervalMomentum={true}
         fadingEdgeLength={20}
-       
+      bounces={false}
       >
         {data.map((item:any,index:number)=>{
              return  <TouchableHighlight key={item.id}>
                <Animated.View style = {{width:300}} >
-             <View style={styles.rowItem}>
+             <View style={[styles.rowItem]}>
                <View style = {styles.title_wrapper}>
                <View key={index+1} 
-                style={[styles.item_image,{backgroundColor: translationY.value > 40 * index || index === 0 ? textPrimary : textSecondary,}]}/>           
+                style={[styles.step,{backgroundColor: translationY.value > 40 * index || index === 0 ? textPrimary : textSecondary}]}/>      
                <Text style={styles.title}>{item.attributes.name}</Text>
                </View>
                <Text style={styles.body}>{item.attributes.description}</Text>
@@ -74,9 +71,8 @@ React.useEffect(()=>{setCurrentIndex(0)},[])
              </Animated.View>
             </TouchableHighlight> 
         })}
-       </Animated.ScrollView>
-      
-    </Animated.View>
+       </Animated.ScrollView>     
+    </View>
     </SafeAreaView>
   );
 }
@@ -87,17 +83,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'transition',
      position:'relative',
-     height:height/2.6,
   },
-  item_image:{
+  scroll_view:{
+    borderLeftWidth:1,
+    borderLeftColor:backgroundSecondary,
+     height:height/3,
+    width:width-100,
+    marginHorizontal:10,
+  },
+  step:{
     width: 35,
     height: 35,
-    borderWidth:1,
+    borderWidth:5,
     borderRadius:17.5,
     justifyContent: "center",
     position:'absolute',
     left:-34,
     top:-35,
+    color:textSecondary,
+    borderColor:textPrimary
   },
   title_wrapper:{
     flexDirection:'row',
@@ -121,7 +125,9 @@ const styles = StyleSheet.create({
   borderLeftWidth:2,
   borderLeftColor:textPrimary,
   position:'absolute',
-  left:33
+  left:33,
+  maxHeight:293,
+  borderRadius:2
   },
   string:{
      borderLeftWidth:0.5,
@@ -130,6 +136,8 @@ const styles = StyleSheet.create({
       left:34.5,
       top:5,
       paddingBottom:10,
+      maxHeight:289,
+      borderRadius:2
   },
   body: {
      flex:3,

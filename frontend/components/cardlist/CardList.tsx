@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, SafeAreaView, StyleSheet } from "react-native";
 import { View, Text } from "../../components/Themed";
 import React, { useEffect, useState } from "react";
 import NavigateBar from "../navigate-bar/NavigateBar";
@@ -152,6 +152,7 @@ export default function CardList({ navigation }: CardListProps) {
   };
 
   return (
+    <SafeAreaView style={{backgroundColor:backgroundPrimary}}>
     <View style={styles.card_list_wrapper}>
       <View style={styles.user_wrapper}>
         <View style={{ backgroundColor: backgroundPrimary, width: width / 2 }}>
@@ -219,6 +220,7 @@ export default function CardList({ navigation }: CardListProps) {
         />
       ) : null}
     </View>
+    </SafeAreaView>
   );
 }
 const { width } = widthScreen;

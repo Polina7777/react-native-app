@@ -4,6 +4,7 @@ import ImageComponent from "../image/Image";
 import { widthScreen} from "../../constants/Sizes";
 import { backgroundSecondary, textPrimary } from "../../constants/Colors";
 import { CardProps } from "../../interfaces";
+import React from "react";
 
 
 export default function Card({

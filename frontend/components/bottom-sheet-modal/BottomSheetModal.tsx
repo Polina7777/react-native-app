@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
 
   modal: {
     justifyContent: "flex-end",
-    // marginHorizontal: 10,
     width: width - 30,
     alignSelf: "center",
      height:height/2.2,
@@ -94,9 +93,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
      height:height/2
 
-  },
-  center: {
-    // alignItems: "center",
   },
   constituents_wrapper: {
     paddingTop: 10,
