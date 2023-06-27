@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, SafeAreaView, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import { ImageComponentDetailedCard } from "../image/ImageDetailed";
 import Loader from "../loader/Loader";
@@ -16,7 +16,6 @@ import { IRecipe, IUser } from "../../interfaces";
 import { Image } from "expo-image";
 import { userApi } from "../../api-requests/user-api";
 import { favoritesApi } from "../../api-requests/favorites-api";
-import VerticalStepIndicator from "../slider/Slider";
 import { processApi } from "../../api-requests/process-api";
 import React from "react";
 
@@ -137,6 +136,7 @@ export default function DetailedCard({ navigation, route }: any) {
   };
 
   return recipe && checkComplite ? (
+    <SafeAreaView>
     <View style={styles.container}>
       <Pressable onPress={likeClick}>
         <Image
@@ -170,6 +170,7 @@ export default function DetailedCard({ navigation, route }: any) {
         />
       </View>
     </View>
+    </SafeAreaView>
   ) : (
     <Loader />
   );
@@ -178,12 +179,8 @@ const { width } = widthScreen;
 const { height } = heightScreen;
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     alignItems: "center",
-    // justifyContent: "center",
     backgroundColor: backgroundPrimary,
-    // paddingTop: 100,
-    //position: "relative",
     height:height
   },
   info__wrapper: {

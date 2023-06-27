@@ -74,31 +74,29 @@ const { height } = heightScreen;
 const styles = StyleSheet.create({
   flexView: {
     backgroundColor: "transition",
-    width:width-20,
-    height:height/2.2
+    width:width,
+    justifyContent:"flex-end"
   },
 
   modal: {
     justifyContent: "flex-end",
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     width: width - 30,
     alignSelf: "center",
      height:height/2.2,
-    paddingVTop:10
+    paddingTop:10
   },
   modalContent: {
     backgroundColor: backgroundSecondary,
     borderRadius: 20,
-    paddingVertical: 10,
+    paddingTop: 10,
     width: width - 30,
     alignSelf: "center",
      height:height/2
 
   },
   center: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
+    // alignItems: "center",
   },
   constituents_wrapper: {
     paddingTop: 10,
@@ -113,6 +111,8 @@ const styles = StyleSheet.create({
     height: 5,
     backgroundColor: "#bbb",
     borderRadius: 3,
+    alignItems:'center',
+    alignSelf:'center'
   },
   btnContainer: {
     display: "flex",
