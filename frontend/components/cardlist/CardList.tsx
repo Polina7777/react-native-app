@@ -159,7 +159,6 @@ export default function CardList({ navigation }: CardListProps) {
           <Text style={styles.hello}>Hello,</Text>
           <View style={styles.hello_wrapper}>
             <Text style={styles.hello_user}> User!</Text>
-
             <Image
               style={{
                 width: 30,

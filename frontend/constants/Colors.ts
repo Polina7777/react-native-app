@@ -1,8 +1,7 @@
 const tintColorLight = '#2f95dc';
 const tintColorDark = '#fff';
-// export const backgroundPrimary='#11151E';
-export const backgroundPrimary='#1c1424';
 
+export const backgroundPrimary='#1c1424';
 export const backgroundSecondary= "#302137";
 export const textPrimary="#cfe38a";
 export const textSecondary="#e7ebda";
