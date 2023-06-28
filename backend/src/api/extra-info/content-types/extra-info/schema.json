@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "extra_infos",
+  "info": {
+    "singularName": "extra-info",
+    "pluralName": "extra-infos",
+    "displayName": "ExtraInfo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "kcal": {
+      "type": "string"
+    },
+    "grams": {
+      "type": "string"
+    },
+    "min": {
+      "type": "string"
+    },
+    "serve": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}
